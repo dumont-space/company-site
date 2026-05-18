@@ -1,71 +1,1485 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dumont Space</title>
-
+<meta name="description" content="Dumont Space — Exploração Aeroespacial Experimental Brasileira. Plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.">
+<title>Dumont Space — Exploração Aeroespacial Experimental Brasileira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-
-body{
-  margin:0;
-  background:#050816;
-  color:white;
-  font-family:Arial;
+:root{
+  --bg-deep:#020510;
+  --bg-dark:#050816;
+  --bg-card:rgba(10,18,40,0.8);
+  --bg-card-hover:rgba(15,25,55,0.9);
+  --blue-deep:#0a1628;
+  --blue-accent:#0066ff;
+  --cyan:#00d4ff;
+  --cyan-dim:rgba(0,212,255,0.12);
+  --cyan-glow:rgba(0,212,255,0.4);
+  --white:#ffffff;
+  --text-primary:#e8f4ff;
+  --text-secondary:rgba(200,225,255,0.7);
+  --text-muted:rgba(150,180,220,0.5);
+  --border:rgba(0,212,255,0.13);
+  --border-bright:rgba(0,212,255,0.35);
+  --font-h:'Exo 2',sans-serif;
+  --font-b:'Inter',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
+  --tr:all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
 
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2.5rem;height:74px;display:flex;align-items:center;justify-content:space-between;transition:var(--tr)}
+.nav.scrolled{background:rgba(2,5,16,0.93);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo-icon{width:34px;height:34px;flex-shrink:0}
+.nav-logo-text{font-family:var(--font-h);font-size:1.05rem;font-weight:700;letter-spacing:.13em;color:#fff}
+.nav-logo-text span{color:var(--cyan)}
+/* ── BRAND IMAGES ── */
+.nav-logo-img{height:34px;width:auto;flex-shrink:0;display:block}
+.hero-logo-img{width:min(460px,68vw);display:block;margin:0 auto 1.8rem;animation:fadeInUp .9s .18s ease both;filter:drop-shadow(0 0 50px rgba(0,212,255,.18))}
+.footer-logo-img{height:90px;width:auto;display:block}
+.araci-prog-logo{width:160px;display:block;margin:0 auto;mix-blend-mode:screen;opacity:.92}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:var(--tr)}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:7px 18px;border:1px solid var(--cyan) !important;border-radius:4px;color:var(--cyan) !important}
+.nav-cta::after{display:none !important}
+.nav-cta:hover{background:rgba(0,212,255,.1) !important;box-shadow:0 0 18px rgba(0,212,255,.3)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-burger span{display:block;width:22px;height:1.5px;background:#fff;transition:var(--tr)}
+.mobile-nav{display:none;position:fixed;top:74px;left:0;right:0;background:rgba(2,5,16,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:999;flex-direction:column;gap:1.2rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:.95rem;color:var(--text-secondary);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border);transition:var(--tr)}
+.mobile-nav a:last-child{border-bottom:none}
+.mobile-nav a:hover{color:var(--cyan)}
+
+/* ── HERO ── */
+.hero{position:relative;width:100%;height:100vh;min-height:680px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#stars-canvas{position:absolute;inset:0;z-index:0}
+.hero-atmo{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:190%;padding-bottom:190%;border-radius:50%;background:radial-gradient(ellipse at center top,transparent 0%,transparent 30%,rgba(0,60,180,.05) 44%,rgba(0,90,255,.11) 53%,rgba(0,140,255,.20) 61%,rgba(0,190,255,.28) 67%,rgba(0,200,255,.18) 72%,rgba(0,60,160,.38) 77%,rgba(2,15,50,.60) 83%,rgba(2,5,16,.88) 90%,rgba(2,5,16,1) 100%);z-index:1}
+.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(0,212,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at center,transparent 22%,black 54%,transparent 88%)}
+.hero-content{position:relative;z-index:10;text-align:center;padding:0 2rem;max-width:880px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid rgba(0,212,255,.28);border-radius:100px;background:rgba(0,212,255,.05);font-family:var(--font-m);font-size:.7rem;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;margin-bottom:2rem;animation:fadeInUp .9s ease both}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+.hero-title{font-family:var(--font-h);font-size:clamp(3.2rem,9vw,7.2rem);font-weight:700;letter-spacing:.07em;line-height:1;color:#fff;text-shadow:0 0 80px rgba(0,212,255,.25);animation:fadeInUp .9s .18s ease both;margin-bottom:.4rem}
+.hero-title-grad{background:linear-gradient(135deg,#fff 0%,#00d4ff 55%,#0066ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-family:var(--font-b);font-size:clamp(.85rem,1.8vw,1rem);font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem;animation:fadeInUp .9s .32s ease both}
+.hero-desc{font-size:clamp(.95rem,1.9vw,1.12rem);color:var(--text-secondary);max-width:640px;margin:0 auto 2.8rem;line-height:1.85;animation:fadeInUp .9s .46s ease both}
+.hero-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp .9s .6s ease both}
+.hero-scroll{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:7px;animation:fadeIn 2s 1.4s ease both}
+.hero-scroll span{font-family:var(--font-m);font-size:.62rem;letter-spacing:.22em;color:var(--text-muted);text-transform:uppercase}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+/* ── BUTTONS ── */
+.btn-p{padding:13px 30px;background:linear-gradient(135deg,#0055ee,#00d4ff);color:#fff;border:none;border-radius:4px;font-family:var(--font-b);font-size:.88rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:var(--tr);box-shadow:0 4px 24px rgba(0,100,255,.38)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,212,255,.5)}
+.btn-s{padding:13px 30px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:4px;font-family:var(--font-b);font-size:.88rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:var(--tr)}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05);transform:translateY(-2px)}
+.btn-g{padding:13px 30px;background:transparent;color:var(--cyan);border:1px solid var(--cyan);border-radius:4px;font-family:var(--font-b);font-size:.88rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:var(--tr)}
+.btn-g:hover{background:rgba(0,212,255,.08);box-shadow:0 0 22px rgba(0,212,255,.28);transform:translateY(-2px)}
+
+/* ── SECTIONS COMMON ── */
+section{position:relative}
+.si{max-width:1200px;margin:0 auto;padding:6rem 2rem}
+.s-label{font-family:var(--font-m);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:.9rem;display:flex;align-items:center;gap:12px}
+.s-label::before{content:'';display:block;width:22px;height:1px;background:var(--cyan)}
+.s-title{font-family:var(--font-h);font-size:clamp(1.9rem,4.5vw,3rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1.4rem}
+.s-title span{background:linear-gradient(135deg,#00d4ff,#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.s-desc{font-size:1rem;color:var(--text-secondary);max-width:640px;line-height:1.85}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}.rd5{transition-delay:.5s}.rd6{transition-delay:.6s}
+
+/* ── ABOUT ── */
+.about{background:linear-gradient(to bottom,var(--bg-deep),#040c1f)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-quote{font-family:var(--font-h);font-size:clamp(1.3rem,2.4vw,1.75rem);font-weight:600;color:var(--cyan);border-left:3px solid var(--cyan);padding:1rem 1.5rem;margin:2.2rem 0;line-height:1.45;background:rgba(0,212,255,.03);border-radius:0 8px 8px 0}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.2rem}
+.about-stat{padding:1.4rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-card)}
+.about-stat-val{font-family:var(--font-h);font-size:1.9rem;font-weight:700;color:var(--cyan);display:block}
+.about-stat-lbl{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+.about-planet{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(ellipse at 30% 28%,#1a3a70 0%,#0d2040 40%,#061020 70%,#020810 100%);box-shadow:0 0 80px rgba(0,100,255,.18),inset 0 0 40px rgba(0,0,0,.7);position:relative;overflow:hidden;max-width:400px;margin:0 auto;animation:float 6s ease-in-out infinite}
+.about-planet::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(0,120,255,.08) 30%,transparent 60%)}
+.about-planet-atmo{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(ellipse at center,transparent 63%,rgba(0,100,200,.07) 70%,rgba(0,150,255,.18) 77%,rgba(0,200,255,.12) 82%,transparent 90%)}
+
+/* ── TECH CARDS ── */
+.tech{background:#040c1f}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.2rem}
+.tc{padding:2rem;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);backdrop-filter:blur(12px);transition:var(--tr);position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:var(--tr)}
+.tc:hover{border-color:var(--border-bright);background:var(--bg-card-hover);transform:translateY(-5px);box-shadow:0 16px 50px rgba(0,212,255,.1)}
+.tc:hover::before{opacity:1}
+.tc-icon{width:46px;height:46px;border-radius:10px;background:rgba(0,212,255,.09);border:1px solid rgba(0,212,255,.18);display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;transition:var(--tr)}
+.tc:hover .tc-icon{background:rgba(0,212,255,.18);box-shadow:0 0 18px rgba(0,212,255,.18)}
+.tc-icon svg{width:22px;height:22px;stroke:var(--cyan);fill:none}
+.tc-title{font-family:var(--font-h);font-size:1.02rem;font-weight:600;color:#fff;margin-bottom:.7rem}
+.tc-desc{font-size:.855rem;color:var(--text-secondary);line-height:1.75}
+
+/* ── PROGRAMS ── */
+.programs{background:linear-gradient(to bottom,#040c1f,#020814)}
+.prog-card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:var(--tr);cursor:pointer;max-width:820px;margin:2.8rem auto 0}
+.prog-card:hover{border-color:var(--border-bright);box-shadow:0 24px 80px rgba(0,80,200,.22);transform:translateY(-5px)}
+.prog-card-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 72% 50%,rgba(0,80,200,.22) 0%,rgba(0,40,100,.12) 40%,rgba(5,10,30,.92) 100%)}
+.prog-araci-logo-img{width:62%;height:auto;max-height:80%;display:block;margin:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:contain;mix-blend-mode:screen;opacity:.8}
+.prog-card-vis{position:absolute;right:0;top:0;bottom:0;width:46%;background:radial-gradient(ellipse at center,rgba(0,100,255,.12) 0%,rgba(0,50,150,.06) 50%,transparent 100%)}
+.prog-card-in{position:relative;z-index:2;padding:3.2rem}
+.prog-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid rgba(0,212,255,.28);border-radius:100px;background:rgba(0,212,255,.05);font-family:var(--font-m);font-size:.67rem;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase;margin-bottom:1.4rem}
+.prog-title{font-family:var(--font-h);font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;color:#fff;margin-bottom:.9rem}
+.prog-subtitle{font-size:.95rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:1.4rem}
+.prog-desc{font-size:.92rem;color:var(--text-secondary);line-height:1.85;max-width:420px;margin-bottom:2.2rem}
+.prog-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:2.2rem}
+.prog-tag{padding:4px 12px;border:1px solid rgba(100,160,255,.2);border-radius:100px;font-family:var(--font-m);font-size:.67rem;color:rgba(150,200,255,.65);letter-spacing:.07em}
+
+/* ── ARACI ── */
+.araci{background:linear-gradient(to bottom,#020814,#030d20)}
+.araci-hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:5rem}
+.araci-quote{font-family:var(--font-h);font-size:clamp(1.3rem,2.3vw,1.75rem);font-weight:600;color:#fff;line-height:1.5;padding:1.8rem;border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;background:rgba(0,212,255,.02);margin:2rem 0}
+.araci-quote span{color:var(--cyan)}
+.araci-mono{font-size:.85rem;color:var(--text-muted);font-family:var(--font-m);letter-spacing:.05em;line-height:1.95;margin-top:1.5rem}
+.hud-panel{border:1px solid var(--border);border-radius:12px;background:rgba(5,14,38,.85);padding:1.8rem;position:relative;overflow:hidden}
+.hud-panel::before{content:'ARACI — MISSION CONTROL';font-family:var(--font-m);font-size:.63rem;letter-spacing:.2em;color:var(--cyan);opacity:.55;display:block;margin-bottom:1.4rem}
+.hud-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;border-bottom:1px solid rgba(0,212,255,.06);font-family:var(--font-m);font-size:.77rem}
+.hud-lbl{color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase}
+.hud-val{color:var(--cyan);font-weight:500}
+.hud-bar{width:76px;height:3px;background:rgba(0,212,255,.09);border-radius:2px;overflow:hidden}
+.hud-bar-fill{height:100%;background:linear-gradient(90deg,#0066ff,#00d4ff);border-radius:2px;transition:width 1.8s ease}
+.alt-row{display:flex;gap:.7rem;align-items:center;font-family:var(--font-m);font-size:.72rem}
+.alt-lbl{width:58px;color:var(--cyan)}
+.alt-bar{flex:1;height:2px;background:rgba(0,212,255,.08);border-radius:1px}
+.alt-bar-fill{height:100%;background:var(--cyan);border-radius:1px}
+.alt-ph{color:var(--text-muted)}
+
+/* ── TIMELINE ── */
+.tl-wrap{position:relative;padding:1rem 0}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--border-bright) 8%,var(--border-bright) 92%,transparent);transform:translateX(-50%)}
+.tl-item{display:grid;grid-template-columns:1fr 56px 1fr;margin-bottom:3rem;position:relative}
+.tl-item:nth-child(odd) .tl-content{grid-column:1;text-align:right;padding-right:2.2rem}
+.tl-item:nth-child(odd) .tl-empty{grid-column:3}
+.tl-item:nth-child(even) .tl-content{grid-column:3;text-align:left;padding-left:2.2rem}
+.tl-item:nth-child(even) .tl-empty{grid-column:1}
+.tl-node{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
+.tl-dot{width:15px;height:15px;border-radius:50%;background:var(--bg-deep);border:2px solid var(--cyan);box-shadow:0 0 10px var(--cyan-glow);flex-shrink:0;margin-top:1.4rem;transition:var(--tr)}
+.tl-dot.active{background:var(--cyan);animation:dotPulse 2s infinite}
+.tl-phase{font-family:var(--font-m);font-size:.68rem;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:.5rem}
+.tl-card{padding:1.4rem;border:1px solid var(--border);border-radius:10px;background:var(--bg-card);transition:var(--tr)}
+.tl-card:hover{border-color:var(--border-bright);background:var(--bg-card-hover);box-shadow:0 8px 30px rgba(0,212,255,.08)}
+.tl-card-title{font-family:var(--font-h);font-size:.98rem;font-weight:600;color:#fff;margin-bottom:.45rem}
+.tl-alt{font-family:var(--font-m);font-size:.73rem;color:var(--cyan);margin-bottom:.7rem}
+.tl-card-desc{font-size:.82rem;color:var(--text-secondary);line-height:1.72}
+.tl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.9rem}
+.tl-item:nth-child(odd) .tl-tags{justify-content:flex-end}
+.tl-tag{padding:3px 9px;border:1px solid rgba(0,212,255,.13);border-radius:100px;font-family:var(--font-m);font-size:.63rem;color:var(--text-muted)}
+
+/* ── STATUS BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-m);font-size:.67rem;letter-spacing:.12em;padding:3px 10px;border-radius:100px;margin-bottom:.7rem}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.b-active{color:#00ff88;background:rgba(0,255,100,.06);border:1px solid rgba(0,255,100,.2)}
+.b-active .badge-dot{animation:pulse 1.5s infinite}
+.b-planned{color:rgba(150,185,255,.75);background:rgba(0,50,200,.1);border:1px solid rgba(0,100,255,.2)}
+.b-future{color:rgba(140,150,200,.6);background:rgba(50,50,100,.1);border:1px solid rgba(100,100,200,.14)}
+.b-milestone{color:var(--cyan);background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.25)}
+
+/* ── MISSIONS ── */
+.missions{background:linear-gradient(to bottom,#030d20,#040c1f)}
+.m-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:2rem}
+.m-card{padding:1.9rem;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);backdrop-filter:blur(12px);transition:var(--tr);position:relative;overflow:hidden}
+.m-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:var(--tr)}
+.m-card:hover{border-color:var(--border-bright);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,212,255,.09)}
+.m-card:hover::before{opacity:1}
+.m-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.1rem}
+.m-id{font-family:var(--font-m);font-size:.67rem;color:var(--text-muted);letter-spacing:.1em;margin-bottom:4px}
+.m-name{font-family:var(--font-h);font-size:1.25rem;font-weight:600;color:#fff}
+.m-desc{font-size:.86rem;color:var(--text-secondary);line-height:1.75;margin-bottom:1.3rem}
+.m-obj{list-style:none;margin-bottom:1.3rem}
+.m-obj li{font-family:var(--font-m);font-size:.77rem;color:var(--text-muted);padding:3px 0;display:flex;align-items:center;gap:8px}
+.m-obj li::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.m-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1.1rem;border-top:1px solid var(--border)}
+.m-date{font-family:var(--font-m);font-size:.73rem;color:var(--text-muted)}
+.m-section-hdr{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
+.m-section-hdr::after{content:'';flex:1;height:1px}
+.m-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:1.5rem}
+.m-card-sm{padding:1.3rem}
+.m-card-sm .m-name{font-size:1.05rem}
+.m-card-sm .m-desc{font-size:.82rem;margin-bottom:.9rem}
+.m-card-sm .m-obj li{font-size:.73rem;padding:2px 0}
+.mc-crit{font-family:var(--font-m);font-size:.7rem;color:rgba(0,212,255,.65);margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.mc-crit::before{content:'CRITÉRIO — ';letter-spacing:.08em}
+@media(max-width:1100px){.m-grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.m-grid-3{grid-template-columns:1fr}}
+
+/* ── ASPSAT ── */
+.aspsat{background:linear-gradient(to bottom,#040c1f,#020810)}
+.aspsat-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2.8rem}
+.spec-item{display:flex;gap:1.4rem;padding:1.2rem 0;border-bottom:1px solid var(--border)}
+.spec-item:last-child{border-bottom:none}
+.spec-icon{width:38px;height:38px;border-radius:8px;background:rgba(0,212,255,.07);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.spec-icon svg{width:19px;height:19px;stroke:var(--cyan);fill:none}
+.spec-name{font-family:var(--font-h);font-size:.88rem;font-weight:600;color:#fff;margin-bottom:3px}
+.spec-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.65}
+.aspsat-diagram{border:1px solid var(--border);border-radius:16px;background:rgba(5,12,35,.85);padding:2.2rem}
+.diag-title{font-family:var(--font-m);font-size:.63rem;letter-spacing:.2em;color:var(--cyan);opacity:.55;margin-bottom:1.8rem}
+.mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-top:1rem}
+.mod-block{padding:1.1rem;border:1px solid var(--border);border-radius:9px;background:rgba(0,28,70,.28);transition:var(--tr)}
+.mod-block:hover{border-color:var(--border-bright);background:rgba(0,38,95,.38)}
+.mod-name{font-family:var(--font-m);font-size:.7rem;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-bottom:.4rem}
+.mod-detail{font-size:.77rem;color:var(--text-muted);line-height:1.5}
+/* ── PLATFORM DIAGRAM ── */
+.plat-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:rgba(2,8,24,.85);padding:1.4rem}
+.plat-hint{font-family:var(--font-m);font-size:.62rem;letter-spacing:.15em;color:var(--cyan);opacity:.5;margin-bottom:.9rem;text-transform:uppercase}
+.plat-tooltip{border-top:1px solid var(--border);padding-top:1.1rem;margin-top:.8rem;opacity:0;transition:opacity .35s ease;min-height:88px}
+.plat-tooltip.active{opacity:1}
+.pt-name{font-family:var(--font-h);font-size:.9rem;font-weight:600;color:#fff;margin-bottom:3px}
+.pt-role{font-family:var(--font-m);font-size:.66rem;letter-spacing:.13em;color:var(--cyan);margin-bottom:.55rem;text-transform:uppercase}
+.pt-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.65;margin-bottom:.65rem}
+.pt-specs{display:flex;flex-wrap:wrap;gap:5px}
+.pt-spec{padding:2px 8px;border:1px solid var(--border);border-radius:100px;font-family:var(--font-m);font-size:.62rem;color:var(--text-muted)}
+.pc-group{transition:filter .3s}
+.pc-group.pc-lit{filter:drop-shadow(0 0 7px rgba(0,212,255,.8))}
+.pc-hover{cursor:pointer}
+.phase-item{display:flex;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.phase-item:last-child{border-bottom:none}
+.phase-alt{font-family:var(--font-m);font-size:.67rem;color:var(--cyan);white-space:nowrap;min-width:72px;padding-top:2px}
+.phase-name{font-family:var(--font-h);font-size:.88rem;font-weight:600;color:#fff;margin-bottom:2px}
+.phase-desc{font-size:.8rem;color:var(--text-muted);line-height:1.65}
+
+/* ── FOOTER ── */
+footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+.footer-in{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;padding-bottom:2.8rem;border-bottom:1px solid var(--border)}
+.footer-desc{font-size:.86rem;color:var(--text-muted);line-height:1.85;margin-top:.9rem;max-width:270px}
+.footer-phrase{font-family:var(--font-h);font-size:.95rem;font-weight:500;color:var(--cyan);margin-top:1.4rem;opacity:.8}
+.footer-col-title{font-family:var(--font-h);font-size:.77rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#fff;margin-bottom:1.1rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.footer-links a{font-size:.84rem;color:var(--text-muted);text-decoration:none;transition:var(--tr)}
+.footer-links a:hover{color:var(--cyan)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.8rem;flex-wrap:wrap;gap:.9rem}
+.footer-copy{font-family:var(--font-m);font-size:.7rem;color:var(--text-muted);letter-spacing:.07em}
+.footer-social{display:flex;gap:.9rem}
+.footer-soc-a{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:var(--tr)}
+.footer-soc-a:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(0,212,255,.2)}
+.footer-soc-a svg{width:15px;height:15px;fill:currentColor}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.82)}}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 10px rgba(0,212,255,.55)}50%{box-shadow:0 0 22px rgba(0,212,255,1),0 0 38px rgba(0,212,255,.38)}}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.28;transform:scaleY(.6)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .tech-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{gap:3rem}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2.5rem}
 }
-
-h1{
-  font-size:5rem;
-  margin:0;
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .about-grid{grid-template-columns:1fr}
+  .about-planet{max-width:280px;order:-1}
+  .tech-grid{grid-template-columns:1fr}
+  .araci-hero{grid-template-columns:1fr}
+  .m-grid{grid-template-columns:1fr}
+  .aspsat-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .tl-line{left:18px}
+  .tl-item{grid-template-columns:36px 1fr}
+  .tl-item:nth-child(odd) .tl-content,.tl-item:nth-child(even) .tl-content{grid-column:2;text-align:left;padding-left:1.4rem;padding-right:0}
+  .tl-item:nth-child(odd) .tl-empty,.tl-item:nth-child(even) .tl-empty{display:none}
+  .tl-node{grid-column:1}
+  .tl-item:nth-child(odd) .tl-tags{justify-content:flex-start}
 }
-
-p{
-  font-size:1.3rem;
-  max-width:700px;
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .prog-card-in{padding:2rem}
 }
-
-button{
-  padding:15px 30px;
-  border:none;
-  background:#00bfff;
-  color:white;
-  font-size:1rem;
-  cursor:pointer;
-  border-radius:10px;
-}
-
 </style>
-
 </head>
-
 <body>
 
-<section class="hero">
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="images/dumont_symbol_only_transparent.png" alt="Dumont Space" class="nav-logo-img">
+    <span class="nav-logo-text">DUMONT <span>SPACE</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#araci">Araci</a></li>
+    <li><a href="#missoes">Missões</a></li>
+    <li><a href="#aspsat">Sonda</a></li>
+    <li><a href="#araci" class="nav-cta">Explorar</a></li>
+  </ul>
+  <div class="nav-burger" id="nav-burger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#sobre" onclick="toggleNav()">Sobre</a>
+  <a href="#tecnologia" onclick="toggleNav()">Tecnologia</a>
+  <a href="#programas" onclick="toggleNav()">Programas</a>
+  <a href="#araci" onclick="toggleNav()">Programa Araci</a>
+  <a href="#missoes" onclick="toggleNav()">Missões</a>
+  <a href="#aspsat" onclick="toggleNav()">AspSat</a>
+</div>
 
-<h1>DUMONT SPACE</h1>
-
-<p>
-Exploração aeroespacial experimental brasileira.
-</p>
-
-<button>
-Programa Araci
-</button>
-
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <canvas id="stars-canvas"></canvas>
+  <div class="hero-atmo"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Iniciativa Aeroespacial Experimental Brasileira
+    </div>
+    <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="hero-logo-img">
+    <p class="hero-desc">
+      Iniciativa aeroespacial experimental voltada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.
+    </p>
+    <div class="hero-btns">
+      <a href="#araci" class="btn-p">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12,2 20,22 12,16 4,22"/></svg>
+        Programa Araci
+      </a>
+      <a href="#missoes" class="btn-s">Missões</a>
+      <a href="#sobre" class="btn-g">Explorar</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-</body>
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="about" id="sobre">
+  <div class="si">
+    <div class="about-grid">
+      <div>
+        <p class="s-label reveal">Sobre a Dumont Space</p>
+        <h2 class="s-title reveal rd1">Engenharia<br><span>Aeroespacial</span><br>Independente</h2>
+        <div class="about-quote reveal rd2">"Antes do espaço, existe a ascensão."</div>
+        <p class="s-desc reveal rd3">
+          A Dumont Space é uma iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de sistemas, plataformas e tecnologias aeroespaciais independentes. Nossa filosofia une engenharia séria, exploração científica e evolução incremental rumo às futuras fronteiras aeroespaciais.
+        </p>
+        <p class="s-desc reveal rd3" style="margin-top:1rem">
+          Desenvolvemos telemetria, sistemas embarcados, plataformas híbridas, exploração atmosférica, recuperação inteligente, autonomia e engenharia modular — tudo orientado à validação em campo e construção de experiência operacional real.
+        </p>
+        <div class="about-stats reveal rd4">
+          <div class="about-stat">
+            <span class="about-stat-val">50 km+</span>
+            <span class="about-stat-lbl">Altitude alvo estratosférica</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">6</span>
+            <span class="about-stat-lbl">Fases do Programa Araci</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">100%</span>
+            <span class="about-stat-lbl">Tecnologia Nacional</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">2026</span>
+            <span class="about-stat-lbl">Primeiros testes em voo</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal rd2" style="display:flex;justify-content:center">
+        <div class="about-planet">
+          <div class="about-planet-atmo"></div>
+          <svg viewBox="0 0 400 400" style="position:absolute;inset:0;width:100%;height:100%;opacity:.14">
+            <ellipse cx="200" cy="200" rx="175" ry="55" stroke="#00d4ff" stroke-width=".8" fill="none"/>
+            <ellipse cx="200" cy="200" rx="175" ry="105" stroke="#00d4ff" stroke-width=".8" fill="none"/>
+            <ellipse cx="200" cy="200" rx="175" ry="155" stroke="#00d4ff" stroke-width=".8" fill="none"/>
+            <line x1="200" y1="25" x2="200" y2="375" stroke="#00d4ff" stroke-width=".8"/>
+            <line x1="25" y1="200" x2="375" y2="200" stroke="#00d4ff" stroke-width=".8"/>
+            <line x1="65" y1="75" x2="335" y2="325" stroke="#00d4ff" stroke-width=".5"/>
+            <line x1="335" y1="75" x2="65" y2="325" stroke="#00d4ff" stroke-width=".5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<div class="divider"></div>
+
+<!-- ═══════════════ TECH CARDS ═══════════════ -->
+<section class="tech" id="tecnologia">
+  <div class="si">
+    <div style="text-align:center;max-width:580px;margin:0 auto">
+      <p class="s-label reveal" style="justify-content:center">Capacidades Tecnológicas</p>
+      <h2 class="s-title reveal rd1" style="text-align:center">Domínios de <span>Engenharia</span></h2>
+      <p class="s-desc reveal rd2" style="margin:0 auto">Infraestrutura tecnológica modular desenvolvida para suportar missões aeroespaciais experimentais reais.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tc reveal rd1">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
+        <h3 class="tc-title">Engenharia Experimental</h3>
+        <p class="tc-desc">Desenvolvimento iterativo de hardware e software aeroespacial com foco em validação prática e evolução incremental em campo real.</p>
+      </div>
+      <div class="tc reveal rd2">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3 class="tc-title">Telemetria</h3>
+        <p class="tc-desc">Sistemas de aquisição, transmissão e monitoramento de dados em tempo real via RF, LoRa e protocolos redundantes de comunicação.</p>
+      </div>
+      <div class="tc reveal rd3">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3 class="tc-title">Exploração Estratosférica</h3>
+        <p class="tc-desc">Plataformas de alta altitude para operar em ambiente estratosférico extremo, com pressão reduzida, frio intenso e radiação elevada.</p>
+      </div>
+      <div class="tc reveal rd4">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3 class="tc-title">Sistemas Embarcados</h3>
+        <p class="tc-desc">Arquitetura modular baseada em microcontroladores de baixo consumo, firmware robusto e integração multi-sensor para ambientes hostis.</p>
+      </div>
+      <div class="tc reveal rd5">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="tc-title">Recuperação Inteligente</h3>
+        <p class="tc-desc">Sistemas de recuperação de payload com lógica autônoma, redundância estrutural, GPS ativo e sequência de descida controlada.</p>
+      </div>
+      <div class="tc reveal rd6">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <h3 class="tc-title">Autonomia Supervisionada</h3>
+        <p class="tc-desc">Lógica de decisão embarcada com supervisão remota, failsafe configurável e gestão autônoma de energia e comunicação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PROGRAMS ═══════════════ -->
+<section class="programs" id="programas">
+  <div class="si">
+    <p class="s-label reveal">Programas Aeroespaciais</p>
+    <h2 class="s-title reveal rd1">Programas <span>Ativos</span></h2>
+    <p class="s-desc reveal rd2">Iniciativas estruturadas para o desenvolvimento progressivo de tecnologias aeroespaciais brasileiras.</p>
+
+    <div class="prog-card reveal rd2" onclick="scrollTo('araci')">
+      <div class="prog-card-bg"></div>
+      <div class="prog-card-vis">
+        <img src="images/Araci_Logo.png" alt="Programa Araci" class="prog-araci-logo-img">
+      </div>
+      <div class="prog-card-in">
+        <div class="prog-badge">
+          <span style="width:6px;height:6px;background:#00ff88;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block"></span>
+          PROGRAMA ATIVO — 2026
+        </div>
+        <h3 class="prog-title">Programa Araci</h3>
+        <p class="prog-subtitle">Exploração Estratosférica Experimental</p>
+        <p class="prog-desc">
+          Primeiro grande programa aeroespacial da Dumont Space, focado no desenvolvimento progressivo de tecnologias atmosféricas, plataformas near-space e sistemas embarcados de alta altitude.
+        </p>
+        <div class="prog-tags">
+          <span class="prog-tag">Estratosfera</span>
+          <span class="prog-tag">Near-Space</span>
+          <span class="prog-tag">Telemetria</span>
+          <span class="prog-tag">Sistemas Embarcados</span>
+          <span class="prog-tag">Recuperação</span>
+          <span class="prog-tag">LoRa / RF</span>
+        </div>
+        <button class="btn-p" onclick="event.stopPropagation();document.getElementById('araci').scrollIntoView({behavior:'smooth'})">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          Explorar Programa
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ ARACI ═══════════════ -->
+<section class="araci" id="araci">
+  <div class="si">
+
+    <div class="araci-hero">
+      <div>
+        <p class="s-label reveal">Programa Aeroespacial</p>
+        <h2 class="s-title reveal rd1">Programa <span>Araci</span></h2>
+        <p class="s-desc reveal rd2">
+          O Programa Araci é a primeira grande etapa da jornada aeroespacial da Dumont Space — a fundação tecnológica que permitirá evoluções progressivamente mais ambiciosas rumo à estratosfera e além.
+        </p>
+        <blockquote class="araci-quote reveal rd3">
+          "<span>Antes do espaço,</span> existe a ascensão."
+        </blockquote>
+        <p class="s-desc reveal rd4" style="margin-bottom:.9rem">
+          O nome <strong style="color:var(--cyan)">Araci</strong> tem raízes na língua Tupi e remete à <em>mãe do dia</em> — aurora, nascimento da luz, início do céu iluminado. A estratosfera é tratada como o primeiro território aeroespacial da Dumont Space.
+        </p>
+        <p class="s-desc reveal rd4">
+          A filosofia central: dominar a atmosfera antes do espaço. Desenvolver tecnologia camada por camada, validar sistemas progressivamente, construir infraestrutura própria e criar conhecimento aeroespacial real.
+        </p>
+        <p class="araci-mono reveal rd5">
+          OBJETIVOS — domínio atmosférico · telemetria · sistemas embarcados<br>near-space · autonomia · recuperação inteligente · alta altitude
+        </p>
+      </div>
+
+      <div class="hud-panel reveal rd3">
+        <div style="text-align:center;padding-bottom:1.2rem;margin-bottom:1.2rem;border-bottom:1px solid var(--border)">
+          <img src="images/Araci_Logo.png" alt="Programa Araci" class="araci-prog-logo">
+        </div>
+        <div class="hud-row">
+          <span class="hud-lbl">Fase Atual</span>
+          <span class="hud-val">FASE 0 — DEV</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-lbl">Status</span>
+          <span class="hud-val" style="color:#00ff88">● ACTIVE</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-lbl">Altitude Alvo</span>
+          <span class="hud-val">50 km+</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-lbl">Plataforma</span>
+          <span class="hud-val">Sonda Araci-1</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-lbl">Missões Planejadas</span>
+          <span class="hud-val">4</span>
+        </div>
+        <div class="hud-row" style="border-bottom:none">
+          <span class="hud-lbl">Progresso Geral</span>
+          <div class="hud-bar"><div class="hud-bar-fill" id="hud-progress" style="width:0%"></div></div>
+        </div>
+
+        <div style="margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)">
+          <div style="font-family:var(--font-m);font-size:.63rem;letter-spacing:.15em;color:var(--text-muted);margin-bottom:1rem">ALTITUDE PROGRESSION</div>
+          <div style="display:flex;flex-direction:column;gap:.55rem">
+            <div class="alt-row"><div class="alt-lbl">50 km+</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 5</div></div>
+            <div class="alt-row"><div class="alt-lbl">30 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 4</div></div>
+            <div class="alt-row"><div class="alt-lbl">12 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 3</div></div>
+            <div class="alt-row"><div class="alt-lbl">3 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 1</div></div>
+          </div>
+        </div>
+
+        <p style="font-family:var(--font-h);font-size:.92rem;font-weight:600;color:var(--cyan);margin-top:2rem;text-align:center;letter-spacing:.05em;opacity:.9">
+          "O céu é apenas o começo."
+        </p>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div style="margin-top:5rem">
+      <div style="text-align:center;margin-bottom:3.8rem">
+        <p class="s-label reveal" style="justify-content:center">Roadmap do Programa</p>
+        <h2 class="s-title reveal rd1" style="text-align:center">Fases de <span>Desenvolvimento</span></h2>
+        <p class="s-desc reveal rd2" style="margin:0 auto;text-align:center">Seis fases progressivas, cada uma construindo sobre a anterior rumo ao domínio estratosférico completo.</p>
+      </div>
+
+      <div class="tl-wrap">
+        <div class="tl-line"></div>
+
+        <!-- FASE 0 -->
+        <div class="tl-item reveal">
+          <div class="tl-content">
+            <div class="tl-phase">Fase 0</div>
+            <div class="tl-card">
+              <div class="badge b-active"><span class="badge-dot"></span>ACTIVE</div>
+              <h4 class="tl-card-title">Desenvolvimento Terrestre</h4>
+              <div class="tl-alt">Bancada — Ambiente Controlado</div>
+              <p class="tl-card-desc">Desenvolvimento e validação completa de todos os subsistemas em ambiente terrestre controlado antes da primeira missão de voo.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Bancada</span><span class="tl-tag">Energia</span><span class="tl-tag">RF</span>
+                <span class="tl-tag">EMI</span><span class="tl-tag">GPS</span><span class="tl-tag">LoRa</span>
+                <span class="tl-tag">Firmware</span><span class="tl-tag">Sensores</span><span class="tl-tag">Integração</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-node"><div class="tl-dot active"></div></div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <!-- FASE 1 -->
+        <div class="tl-item reveal rd1">
+          <div class="tl-empty"></div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-phase">Fase 1</div>
+            <div class="tl-card">
+              <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+              <h4 class="tl-card-title">Baixa Altitude</h4>
+              <div class="tl-alt">100 m · 500 m · 1 km · 3 km</div>
+              <p class="tl-card-desc">Primeiros voos de teste em baixa altitude para validação de recuperação, tracking, telemetria e comportamento de voo real.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Recuperação</span><span class="tl-tag">Tracking</span>
+                <span class="tl-tag">Telemetria</span><span class="tl-tag">Validação de Voo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="tl-item reveal rd2">
+          <div class="tl-content">
+            <div class="tl-phase">Fase 2</div>
+            <div class="tl-card">
+              <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+              <h4 class="tl-card-title">Alta Atmosfera Inicial</h4>
+              <div class="tl-alt">5 km · 8 km · 10 km</div>
+              <p class="tl-card-desc">Entrada no regime de alta atmosfera. Validação sob condições de frio extremo, pressão reduzida e comunicação de longa distância.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Frio Extremo</span><span class="tl-tag">Pressão</span>
+                <span class="tl-tag">Comunicação</span><span class="tl-tag">Operação Atmosférica</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="tl-item reveal rd1">
+          <div class="tl-empty"></div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-phase">Fase 3</div>
+            <div class="tl-card" style="border-color:rgba(0,212,255,.32);background:rgba(0,50,120,.14)">
+              <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
+              <h4 class="tl-card-title" style="color:var(--cyan)">Entrada Estratosférica</h4>
+              <div class="tl-alt" style="color:#fff;font-weight:600">★ CRUZAR 12 km — Marco Histórico</div>
+              <p class="tl-card-desc"><strong style="color:#fff">Milestone oficial do Programa Araci.</strong> A missão Araci S-01 marca a primeira entrada da Dumont Space no regime estratosférico — evento histórico da organização.</p>
+              <div class="tl-tags">
+                <span class="tl-tag" style="border-color:rgba(0,212,255,.4);color:var(--cyan)">12 km+</span>
+                <span class="tl-tag">Estratosfera</span><span class="tl-tag">Milestone</span><span class="tl-tag">2028</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 4 -->
+        <div class="tl-item reveal rd2">
+          <div class="tl-content">
+            <div class="tl-phase">Fase 4</div>
+            <div class="tl-card">
+              <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
+              <h4 class="tl-card-title">Estratosfera Operacional</h4>
+              <div class="tl-alt">15 km — 25 km</div>
+              <p class="tl-card-desc">Operação contínua no envelope estratosférico com foco em estabilidade de sistemas, autonomia prolongada, redundância e recuperação avançada.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Estabilidade</span><span class="tl-tag">Autonomia</span>
+                <span class="tl-tag">Redundância</span><span class="tl-tag">Recuperação Avançada</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <!-- FASE 5 -->
+        <div class="tl-item reveal rd1">
+          <div class="tl-empty"></div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <div class="tl-phase">Fase 5</div>
+            <div class="tl-card">
+              <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
+              <h4 class="tl-card-title">Estratosfera Profunda</h4>
+              <div class="tl-alt">30 km — 50 km</div>
+              <p class="tl-card-desc">Domínio completo do envelope estratosférico. Near-space, arquitetura madura e envelope expansion rumo às fronteiras do espaço.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Near-Space</span><span class="tl-tag">50 km+</span>
+                <span class="tl-tag">Envelope Expansion</span><span class="tl-tag">Arquitetura Madura</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ MISSIONS ═══════════════ -->
+<section class="missions" id="missoes">
+  <div class="si">
+    <p class="s-label reveal">Operações</p>
+    <h2 class="s-title reveal rd1">Missões <span>Araci</span></h2>
+    <p class="s-desc reveal rd2">Sequência completa de missões de bancada da Fase 0 — validação terrestre progressiva antes dos primeiros voos.</p>
+
+    <!-- ── FASE 0 ACTIVE ── -->
+    <div style="margin-top:3rem">
+      <div class="m-section-hdr reveal" style="color:#00ff88">
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">● Em Andamento — Fase 0</span>
+        <div style="flex:1;height:1px;background:rgba(0,255,100,.13)"></div>
+      </div>
+      <div class="m-grid-3">
+
+        <div class="m-card m-card-sm reveal rd1" style="border-color:rgba(0,255,100,.18)">
+          <div class="m-header">
+            <div><div class="m-id">AR-T01</div><div class="m-name">Telemetria Inicial</div></div>
+            <div class="badge b-active"><span class="badge-dot"></span>ACTIVE</div>
+          </div>
+          <p class="m-desc">Primeiro teste LoRa — envio, recepção, RSSI, latência e integridade de pacotes em solo.</p>
+          <ul class="m-obj">
+            <li>Envio e recepção LoRa</li>
+            <li>Medição de RSSI e latência</li>
+            <li>Integridade de pacotes</li>
+          </ul>
+          <p class="mc-crit">Comunicação estável em solo</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(0,255,100,.75)">Em Andamento</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── FASE 0 PLANNED ── -->
+    <div style="margin-top:2.5rem">
+      <div class="m-section-hdr reveal" style="color:rgba(150,185,255,.7)">
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">◈ Planejadas — Fase 0</span>
+        <div style="flex:1;height:1px;background:rgba(100,150,255,.12)"></div>
+      </div>
+      <div class="m-grid-3">
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T02</div><div class="m-name">Sensores Ambientais</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Validação de BME280, IMU e leitura contínua de sensores ambientais.</p>
+          <ul class="m-obj">
+            <li>BME280 — pressão, temp, umidade</li>
+            <li>IMU — aceleração e orientação</li>
+            <li>Leitura contínua estável</li>
+          </ul>
+          <p class="mc-crit">Leitura estável e coerente</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2">
+          <div class="m-header">
+            <div><div class="m-id">AR-T03</div><div class="m-name">Logging Local</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Validação de gravação em SD — integridade, timestamps, corrupção e recuperação de arquivos.</p>
+          <ul class="m-obj">
+            <li>Integridade dos arquivos</li>
+            <li>Timestamps corretos</li>
+            <li>Recuperação pós-corrupção</li>
+          </ul>
+          <p class="mc-crit">Logs persistentes sem corrupção</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd3">
+          <div class="m-header">
+            <div><div class="m-id">AR-T04</div><div class="m-name">GPS Lock</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Validação do GPS NEO-M8N — aquisição de satélites, estabilidade, precisão, cold e hot start.</p>
+          <ul class="m-obj">
+            <li>Aquisição de satélites</li>
+            <li>Cold start / hot start</li>
+            <li>Precisão e estabilidade de fix</li>
+          </ul>
+          <p class="mc-crit">Fix confiável e repetível</p>
+          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T07</div><div class="m-name">Energia Integrada</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Validação da arquitetura energética completa — reguladores, ripple, consumo, autonomia e aquecimento.</p>
+          <ul class="m-obj">
+            <li>Reguladores e ripple</li>
+            <li>Consumo e autonomia</li>
+            <li>Aquecimento dos componentes</li>
+          </ul>
+          <p class="mc-crit">Estabilidade energética completa</p>
+          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2">
+          <div class="m-header">
+            <div><div class="m-id">AR-T08</div><div class="m-name">RF Coexistence I</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeiro teste de coexistência RF — LoRa + GPS e ESP32, com avaliação de ruído elétrico.</p>
+          <ul class="m-obj">
+            <li>LoRa + GPS simultâneos</li>
+            <li>ESP32 + RF</li>
+            <li>Avaliação de ruído elétrico</li>
+          </ul>
+          <p class="mc-crit">GPS continua funcional com LoRa ativo</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd3">
+          <div class="m-header">
+            <div><div class="m-id">AR-T09</div><div class="m-name">VTX Activation</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeira ativação do VTX FPV — vídeo, alcance, temperatura e alimentação.</p>
+          <ul class="m-obj">
+            <li>Primeira transmissão de vídeo</li>
+            <li>Alcance e qualidade de sinal</li>
+            <li>Temperatura e alimentação</li>
+          </ul>
+          <p class="mc-crit">Transmissão estável</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T10</div><div class="m-name">RF Coexistence II</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Teste RF completo com coexistência de VTX, GPS, LoRa e ESP32 simultâneos.</p>
+          <ul class="m-obj">
+            <li>VTX + GPS + LoRa + ESP32</li>
+            <li>Interferências e EMI</li>
+            <li>Operação simultânea completa</li>
+          </ul>
+          <p class="mc-crit">Operação simultânea funcional</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2">
+          <div class="m-header">
+            <div><div class="m-id">AR-T11</div><div class="m-name">Estrutura Física Alpha</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeira integração física real — distribuição interna, centro de massa, cabeamento e ventilação.</p>
+          <ul class="m-obj">
+            <li>Distribuição interna dos módulos</li>
+            <li>Centro de massa</li>
+            <li>Cabeamento e ventilação</li>
+          </ul>
+          <p class="mc-crit">Arquitetura física coerente</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd3">
+          <div class="m-header">
+            <div><div class="m-id">AR-T12</div><div class="m-name">Térmica Passiva</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Avaliação de aquecimento interno — VTX, reguladores e bateria em operação real.</p>
+          <ul class="m-obj">
+            <li>Temperatura do VTX</li>
+            <li>Reguladores em carga</li>
+            <li>Bateria sob ciclo</li>
+          </ul>
+          <p class="mc-crit">Temperaturas em limites aceitáveis</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T13</div><div class="m-name">Runtime Test</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Operação contínua de várias horas — estabilidade, travamentos, resets e watchdog.</p>
+          <ul class="m-obj">
+            <li>Operação contínua prolongada</li>
+            <li>Travamentos e resets</li>
+            <li>Watchdog de hardware</li>
+          </ul>
+          <p class="mc-crit">Operação contínua estável</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2">
+          <div class="m-header">
+            <div><div class="m-id">AR-T14</div><div class="m-name">Recovery Systems</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Validação de nichrome, acionamentos, MOSFETs e lógica de emergência do sistema de recuperação.</p>
+          <ul class="m-obj">
+            <li>Fio nichrome e queima</li>
+            <li>MOSFETs de acionamento</li>
+            <li>Lógica de emergência</li>
+          </ul>
+          <p class="mc-crit">Acionamento confiável e repetível</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd3">
+          <div class="m-header">
+            <div><div class="m-id">AR-T15</div><div class="m-name">Ground Station Alpha</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeira estação de solo funcional — recepção, interface, mapas e logging operacional.</p>
+          <ul class="m-obj">
+            <li>Recepção de telemetria</li>
+            <li>Interface e mapas</li>
+            <li>Logging de missão</li>
+          </ul>
+          <p class="mc-crit">Acompanhamento operacional em tempo real</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T16</div><div class="m-name">Full Stack Integration</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeira integração COMPLETA — GPS, LoRa, sensores, VTX, SD, energia e firmware todos ativos.</p>
+          <ul class="m-obj">
+            <li>Todos os subsistemas ativos</li>
+            <li>Firmware integrado</li>
+            <li>Telemetria end-to-end</li>
+          </ul>
+          <p class="mc-crit">Sistema completo funcional</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2">
+          <div class="m-header">
+            <div><div class="m-id">AR-T17</div><div class="m-name">Mobility Test</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Simulação de missão em movimento — veículo, deslocamento, tracking e RF dinâmico.</p>
+          <ul class="m-obj">
+            <li>Tracking em veículo</li>
+            <li>RF dinâmico em deslocamento</li>
+            <li>Telemetria em movimento</li>
+          </ul>
+          <p class="mc-crit">Telemetria funcional em movimento</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd3">
+          <div class="m-header">
+            <div><div class="m-id">AR-T18</div><div class="m-name">Field Operations</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Primeira operação completa em campo — checklist, energização, operação e recuperação simulada.</p>
+          <ul class="m-obj">
+            <li>Checklist pré-missão</li>
+            <li>Energização e operação</li>
+            <li>Recuperação simulada</li>
+          </ul>
+          <p class="mc-crit">Operação organizada e documentada</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">AR-T19</div><div class="m-name">Failure Simulation</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+          </div>
+          <p class="m-desc">Simulação de falhas reais — perda de GPS, reset, queda de LoRa e brownout de energia.</p>
+          <ul class="m-obj">
+            <li>Perda de GPS e queda de LoRa</li>
+            <li>Reset e brownout</li>
+            <li>Comportamento de failsafe</li>
+          </ul>
+          <p class="mc-crit">Comportamento previsível em falha</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+        </div>
+
+        <div class="m-card m-card-sm reveal rd2" style="border-color:rgba(0,212,255,.22)">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.55"></div>
+          <div class="m-header">
+            <div><div class="m-id">AR-T20</div><div class="m-name" style="color:var(--cyan)">Fase 0 Completion</div></div>
+            <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
+          </div>
+          <p class="m-desc">Missão final da Fase 0 — validação de maturidade da arquitetura, estabilidade geral e prontidão para voo.</p>
+          <ul class="m-obj">
+            <li>Maturidade da arquitetura</li>
+            <li>Estabilidade geral do sistema</li>
+            <li>Prontidão certificada para voo</li>
+          </ul>
+          <p class="mc-crit" style="color:var(--cyan)">Sistema pronto para a Fase 1</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)">Milestone</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── FLIGHT MISSIONS ── -->
+    <div style="margin-top:2.8rem">
+      <div class="m-section-hdr reveal" style="color:rgba(0,212,255,.65)">
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">◇ Missões de Voo — Fases 1–3</span>
+        <div style="flex:1;height:1px;background:rgba(0,212,255,.1)"></div>
+      </div>
+      <div class="m-grid">
+
+        <div class="m-card reveal rd1">
+          <div class="m-header">
+            <div><div class="m-id">ARACI / A-SERIES / 01</div><div class="m-name">Araci A-01</div></div>
+            <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
+          </div>
+          <p class="m-desc">Primeiro voo de altitude real. Validação de recuperação, tracking GPS e telemetria ao vivo em ambiente de voo.</p>
+          <ul class="m-obj">
+            <li>Primeiro voo de altitude real</li>
+            <li>Validação do sistema de recuperação</li>
+            <li>Tracking GPS em voo</li>
+            <li>Telemetria ao vivo em altitude</li>
+          </ul>
+          <div class="m-footer"><span class="m-date">2028</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted)">Futura</span></div>
+        </div>
+
+        <div class="m-card reveal rd2" style="border-color:rgba(0,212,255,.22)">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5"></div>
+          <div class="m-header">
+            <div><div class="m-id">ARACI / S-SERIES / 01</div><div class="m-name" style="color:var(--cyan)">Araci S-01</div></div>
+            <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
+          </div>
+          <p class="m-desc"><strong style="color:#fff">A missão histórica.</strong> Primeira entrada da Dumont Space no regime estratosférico — cruzar a barreira dos 12 km.</p>
+          <ul class="m-obj">
+            <li>Primeira entrada estratosférica</li>
+            <li>Cruzar a barreira dos 12 km</li>
+            <li>Milestone histórico do Programa Araci</li>
+            <li>Validação de sistemas near-space</li>
+          </ul>
+          <div class="m-footer"><span class="m-date">2028–2029</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)">Milestone</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ ASPSAT ═══════════════ -->
+<section class="aspsat" id="aspsat">
+  <div class="si">
+    <p class="s-label reveal">Plataforma Experimental</p>
+    <h2 class="s-title reveal rd1">Sonda <span>Araci-1</span></h2>
+    <p class="s-desc reveal rd2">Plataforma híbrida drone-balão composta por quatro subsistemas integrados: Harpia I, AspSat, Balão estratosférico e Paraquedas.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem">
+
+      <!-- LEFT: strategy -->
+      <div class="reveal rd1">
+        <p style="font-size:.95rem;color:var(--text-secondary);line-height:1.88;margin-bottom:1.8rem">
+          A Sonda Araci-1 é uma plataforma híbrida drone-balão projetada para exploração estratosférica. Quatro subsistemas trabalham em sequência para garantir lançamento, ascensão, descida e pouso seguros.
+        </p>
+        <div style="font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;color:var(--cyan);margin-bottom:1.1rem;text-transform:uppercase">Perfil de Missão</div>
+        <div>
+          <div class="phase-item">
+            <div class="phase-alt">0 → 100 m</div>
+            <div><div class="phase-name">Lançamento</div><div class="phase-desc">Harpia I decola verticalmente carregando toda a sonda. A 100 m o balão é acionado e inflado.</div></div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-alt">100 m → 3 km</div>
+            <div><div class="phase-name">Ascensão Assistida</div><div class="phase-desc">Balão e drone operam em conjunto. Harpia I fornece estabilização ativa e controle de navegação durante a subida.</div></div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-alt">3 km → MAX</div>
+            <div><div class="phase-name">Ascensão Estratosférica</div><div class="phase-desc">Operação exclusiva do balão. A sonda sobe livremente até a altitude máxima da missão.</div></div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-alt">MAX → 3 km</div>
+            <div><div class="phase-name">Descida com PAE01</div><div class="phase-desc">O estouro do balão aciona automaticamente o paraquedas PAE01. Descida controlada até os 3 km.</div></div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-alt" style="color:#00ff88">3 km → solo</div>
+            <div><div class="phase-name">Pouso Autônomo</div><div class="phase-desc">A 3 km na descida, Harpia I retoma o controle e executa o pouso preciso e seguro da sonda.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: engineering diagram -->
+      <div class="reveal rd3">
+        <div class="plat-wrap">
+          <div class="plat-hint">Diagrama de Engenharia — passe o mouse nos componentes</div>
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" id="platform-svg" style="width:100%;display:block">
+            <defs>
+              <pattern id="eng-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0L0 0 0 20" fill="none" stroke="rgba(0,212,255,0.055)" stroke-width="0.5"/></pattern>
+            </defs>
+            <rect width="400" height="500" fill="url(#eng-grid)"/>
+            <rect x="1" y="1" width="398" height="498" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="1"/>
+            <line x1="200" y1="10" x2="200" y2="490" stroke="rgba(0,212,255,0.06)" stroke-width="0.8" stroke-dasharray="6,4"/>
+            <text x="8" y="13" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.35)" letter-spacing="0.1em">ARACI-1 SONDA // ENG. DIAGRAM // REV.A</text>
+            <line x1="1" y1="17" x2="399" y2="17" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
+
+            <!-- ====== BALÃO ====== -->
+            <g id="g-balao" class="pc-group">
+              <ellipse cx="200" cy="74" rx="52" ry="58" stroke="#00d4ff" stroke-width="1.2" fill="rgba(0,55,170,0.12)"/>
+              <ellipse cx="200" cy="74" rx="52" ry="20" stroke="rgba(0,212,255,0.18)" stroke-width="0.6" fill="none"/>
+              <ellipse cx="200" cy="57" rx="42" ry="11" stroke="rgba(0,212,255,0.13)" stroke-width="0.5" fill="none"/>
+              <ellipse cx="200" cy="93" rx="47" ry="14" stroke="rgba(0,212,255,0.13)" stroke-width="0.5" fill="none"/>
+              <line x1="200" y1="16" x2="200" y2="132" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+              <line x1="150" y1="40" x2="160" y2="109" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
+              <line x1="250" y1="40" x2="240" y2="109" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
+              <ellipse cx="184" cy="54" rx="13" ry="17" fill="rgba(255,255,255,0.025)"/>
+              <path d="M185 130 Q200 138 215 130" stroke="#00d4ff" stroke-width="1" fill="rgba(0,35,110,0.2)"/>
+              <ellipse cx="200" cy="74" rx="56" ry="62" fill="transparent" class="pc-hover" data-c="balao"/>
+              <!-- label -->
+              <line x1="148" y1="74" x2="82" y2="74" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <circle cx="148" cy="74" r="1.8" fill="rgba(0,212,255,0.45)"/>
+              <text x="78" y="72" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">BALÃO</text>
+              <text x="78" y="82" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">BATM-PAE01</text>
+            </g>
+
+            <!-- suspension lines balloon → PAE01 -->
+            <line x1="186" y1="136" x2="181" y2="158" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+            <line x1="200" y1="138" x2="200" y2="158" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+            <line x1="214" y1="136" x2="219" y2="158" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+
+            <!-- ====== PAE01 ====== -->
+            <g id="g-pae01" class="pc-group">
+              <rect x="171" y="158" width="58" height="33" rx="4" stroke="#00d4ff" stroke-width="1.2" fill="rgba(0,45,140,0.2)"/>
+              <line x1="180" y1="162" x2="180" y2="187" stroke="rgba(0,212,255,0.2)" stroke-width="0.6"/>
+              <line x1="189" y1="160" x2="189" y2="189" stroke="rgba(0,212,255,0.2)" stroke-width="0.6"/>
+              <line x1="200" y1="160" x2="200" y2="189" stroke="rgba(0,212,255,0.2)" stroke-width="0.6"/>
+              <line x1="211" y1="160" x2="211" y2="189" stroke="rgba(0,212,255,0.2)" stroke-width="0.6"/>
+              <line x1="220" y1="162" x2="220" y2="187" stroke="rgba(0,212,255,0.2)" stroke-width="0.6"/>
+              <line x1="171" y1="166" x2="229" y2="166" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+              <line x1="171" y1="174" x2="229" y2="174" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+              <line x1="171" y1="182" x2="229" y2="182" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+              <rect x="163" y="150" width="74" height="50" fill="transparent" class="pc-hover" data-c="pae01"/>
+              <!-- label -->
+              <line x1="171" y1="174" x2="82" y2="174" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <circle cx="171" cy="174" r="1.8" fill="rgba(0,212,255,0.45)"/>
+              <text x="78" y="172" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">PARAQUEDAS</text>
+              <text x="78" y="182" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">PC-PAE01</text>
+            </g>
+
+            <!-- lines PAE01 → capsule -->
+            <line x1="183" y1="191" x2="177" y2="207" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+            <line x1="200" y1="191" x2="200" y2="207" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+            <line x1="217" y1="191" x2="223" y2="207" stroke="rgba(0,212,255,0.38)" stroke-width="0.8"/>
+
+            <!-- ====== ASPSAT ====== -->
+            <g id="g-aspsat" class="pc-group">
+              <rect x="160" y="207" width="80" height="116" rx="5" stroke="#00d4ff" stroke-width="1.5" fill="rgba(0,38,110,0.22)"/>
+              <line x1="160" y1="244" x2="240" y2="244" stroke="rgba(0,212,255,0.16)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <line x1="160" y1="281" x2="240" y2="281" stroke="rgba(0,212,255,0.16)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <text x="200" y="231" text-anchor="middle" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.42)">COMPUTE / RF</text>
+              <text x="200" y="267" text-anchor="middle" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.42)">SENSORS / CAM</text>
+              <text x="200" y="304" text-anchor="middle" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.42)">POWER / BMS</text>
+              <!-- camera lens -->
+              <circle cx="160" cy="253" r="7" stroke="#00d4ff" stroke-width="1" fill="rgba(0,8,35,0.9)"/>
+              <circle cx="160" cy="253" r="4" stroke="rgba(0,212,255,0.45)" stroke-width="0.8" fill="rgba(0,70,190,0.28)"/>
+              <circle cx="160" cy="253" r="1.5" fill="rgba(0,212,255,0.6)"/>
+              <!-- antenna -->
+              <line x1="200" y1="207" x2="200" y2="194" stroke="#00d4ff" stroke-width="1.2"/>
+              <line x1="200" y1="197" x2="192" y2="192" stroke="#00d4ff" stroke-width="0.9"/>
+              <line x1="200" y1="197" x2="208" y2="192" stroke="#00d4ff" stroke-width="0.9"/>
+              <!-- connector bolts right side -->
+              <rect x="238" y="224" width="6" height="7" rx="1" stroke="rgba(0,212,255,0.4)" stroke-width="0.7" fill="rgba(0,35,100,0.5)"/>
+              <rect x="238" y="260" width="6" height="7" rx="1" stroke="rgba(0,212,255,0.4)" stroke-width="0.7" fill="rgba(0,35,100,0.5)"/>
+              <rect x="238" y="296" width="6" height="7" rx="1" stroke="rgba(0,212,255,0.4)" stroke-width="0.7" fill="rgba(0,35,100,0.5)"/>
+              <!-- hover zone -->
+              <rect x="152" y="198" width="100" height="134" fill="transparent" class="pc-hover" data-c="aspsat"/>
+              <!-- label -->
+              <line x1="160" y1="265" x2="82" y2="265" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <circle cx="160" cy="265" r="1.8" fill="rgba(0,212,255,0.45)"/>
+              <text x="78" y="263" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">CÁPSULA</text>
+              <text x="78" y="273" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">AspSat</text>
+            </g>
+
+            <!-- mounting struts capsule → drone -->
+            <line x1="168" y1="323" x2="152" y2="352" stroke="rgba(0,212,255,0.32)" stroke-width="0.9"/>
+            <line x1="200" y1="323" x2="200" y2="352" stroke="rgba(0,212,255,0.32)" stroke-width="0.9"/>
+            <line x1="232" y1="323" x2="248" y2="352" stroke="rgba(0,212,255,0.32)" stroke-width="0.9"/>
+
+            <!-- ====== HARPIA I ====== -->
+            <g id="g-harpia" class="pc-group">
+              <!-- center body -->
+              <rect x="172" y="352" width="56" height="30" rx="4" stroke="#00d4ff" stroke-width="1.5" fill="rgba(0,38,110,0.25)"/>
+              <line x1="172" y1="367" x2="228" y2="367" stroke="rgba(0,212,255,0.18)" stroke-width="0.6"/>
+              <line x1="200" y1="352" x2="200" y2="382" stroke="rgba(0,212,255,0.18)" stroke-width="0.6"/>
+              <!-- arms -->
+              <line x1="175" y1="355" x2="114" y2="330" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="225" y1="355" x2="286" y2="330" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="175" y1="379" x2="114" y2="404" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="225" y1="379" x2="286" y2="404" stroke="#00d4ff" stroke-width="1.5"/>
+              <!-- motors -->
+              <rect x="108" y="325" width="12" height="10" rx="2" stroke="#00d4ff" stroke-width="1" fill="rgba(0,90,240,0.35)"/>
+              <rect x="280" y="325" width="12" height="10" rx="2" stroke="#00d4ff" stroke-width="1" fill="rgba(0,90,240,0.35)"/>
+              <rect x="108" y="399" width="12" height="10" rx="2" stroke="#00d4ff" stroke-width="1" fill="rgba(0,90,240,0.35)"/>
+              <rect x="280" y="399" width="12" height="10" rx="2" stroke="#00d4ff" stroke-width="1" fill="rgba(0,90,240,0.35)"/>
+              <!-- rotor discs -->
+              <circle cx="114" cy="330" r="19" stroke="#00d4ff" stroke-width="0.8" fill="rgba(0,28,95,0.15)" stroke-dasharray="5,3"/>
+              <circle cx="286" cy="330" r="19" stroke="#00d4ff" stroke-width="0.8" fill="rgba(0,28,95,0.15)" stroke-dasharray="5,3"/>
+              <circle cx="114" cy="404" r="19" stroke="#00d4ff" stroke-width="0.8" fill="rgba(0,28,95,0.15)" stroke-dasharray="5,3"/>
+              <circle cx="286" cy="404" r="19" stroke="#00d4ff" stroke-width="0.8" fill="rgba(0,28,95,0.15)" stroke-dasharray="5,3"/>
+              <!-- rotor blades -->
+              <line x1="95" y1="330" x2="133" y2="330" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="114" y1="311" x2="114" y2="349" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="267" y1="330" x2="305" y2="330" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="286" y1="311" x2="286" y2="349" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="95" y1="404" x2="133" y2="404" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="114" y1="385" x2="114" y2="423" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="267" y1="404" x2="305" y2="404" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <line x1="286" y1="385" x2="286" y2="423" stroke="rgba(0,212,255,0.4)" stroke-width="1.2"/>
+              <!-- landing legs -->
+              <line x1="177" y1="382" x2="163" y2="418" stroke="rgba(0,212,255,0.42)" stroke-width="0.9"/>
+              <line x1="223" y1="382" x2="237" y2="418" stroke="rgba(0,212,255,0.42)" stroke-width="0.9"/>
+              <line x1="157" y1="418" x2="243" y2="418" stroke="rgba(0,212,255,0.42)" stroke-width="1.2"/>
+              <line x1="157" y1="418" x2="150" y2="425" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"/>
+              <line x1="243" y1="418" x2="250" y2="425" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"/>
+              <line x1="200" y1="418" x2="200" y2="425" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"/>
+              <!-- hover zone -->
+              <rect x="90" y="308" width="220" height="122" fill="transparent" class="pc-hover" data-c="harpia"/>
+              <!-- label -->
+              <line x1="114" y1="367" x2="82" y2="367" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
+              <circle cx="114" cy="367" r="1.8" fill="rgba(0,212,255,0.45)"/>
+              <text x="78" y="365" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">DRONE</text>
+              <text x="78" y="375" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">HARPIA I</text>
+            </g>
+
+            <!-- right dimension line -->
+            <line x1="346" y1="30" x2="346" y2="425" stroke="rgba(0,212,255,0.18)" stroke-width="0.7"/>
+            <line x1="341" y1="30" x2="351" y2="30" stroke="rgba(0,212,255,0.18)" stroke-width="0.7"/>
+            <line x1="341" y1="425" x2="351" y2="425" stroke="rgba(0,212,255,0.18)" stroke-width="0.7"/>
+            <text x="358" y="232" text-anchor="middle" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.35)" transform="rotate(90,358,232)">SONDA COMPLETA</text>
+
+            <!-- bottom border info -->
+            <line x1="1" y1="483" x2="399" y2="483" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
+            <text x="8" y="494" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.28)">DUMONT SPACE · PROGRAMA ARACI · ARACI-1</text>
+            <text x="392" y="494" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.28)">CONFIDENTIAL</text>
+          </svg>
+
+          <!-- tooltip panel -->
+          <div class="plat-tooltip" id="plat-tooltip">
+            <div class="pt-name" id="pt-name"></div>
+            <div class="pt-role" id="pt-role"></div>
+            <div class="pt-desc" id="pt-desc"></div>
+            <div class="pt-specs" id="pt-specs"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div>
+        <a href="#">
+          <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="footer-logo-img">
+        </a>
+        <p class="footer-desc">Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.</p>
+        <p class="footer-phrase">"O céu é apenas o começo."</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <ul class="footer-links">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#tecnologia">Tecnologia</a></li>
+          <li><a href="#programas">Programas</a></li>
+          <li><a href="#araci">Programa Araci</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Operações</div>
+        <ul class="footer-links">
+          <li><a href="#missoes">Missões</a></li>
+          <li><a href="#aspsat">Sonda Araci-1</a></li>
+          <li><a href="#araci">Timeline</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contato</div>
+        <ul class="footer-links">
+          <li><a href="#">Fale Conosco</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Dumont Space — Todos os direitos reservados</span>
+      <span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted);letter-spacing:.1em">BRASIL · EXPLORAÇÃO AEROESPACIAL EXPERIMENTAL</span>
+      <div class="footer-social">
+        <a href="#" class="footer-soc-a" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── STARS CANVAS ──
+const canvas = document.getElementById('stars-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [], shooters = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  const n = Math.floor((canvas.width * canvas.height) / 5800);
+  for (let i = 0; i < n; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.4 + 0.15,
+      alpha: Math.random() * 0.75 + 0.2,
+      speed: Math.random() * 0.0014 + 0.0004,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawStars(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const s of stars) {
+    const a = s.alpha * (0.55 + 0.45 * Math.sin(t * s.speed * 1000 + s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(210,228,255,${a})`;
+    ctx.fill();
+  }
+  // Occasional shooting star
+  if (Math.random() < 0.002) {
+    shooters.push({
+      x: Math.random() * canvas.width * 0.7,
+      y: Math.random() * canvas.height * 0.5,
+      len: Math.random() * 120 + 60,
+      speed: Math.random() * 6 + 5,
+      alpha: 1
+    });
+  }
+  for (let i = shooters.length - 1; i >= 0; i--) {
+    const sh = shooters[i];
+    const grad = ctx.createLinearGradient(sh.x, sh.y, sh.x + sh.len, sh.y + sh.len * 0.4);
+    grad.addColorStop(0, `rgba(255,255,255,0)`);
+    grad.addColorStop(1, `rgba(180,230,255,${sh.alpha})`);
+    ctx.beginPath();
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1;
+    ctx.moveTo(sh.x, sh.y);
+    ctx.lineTo(sh.x + sh.len, sh.y + sh.len * 0.4);
+    ctx.stroke();
+    sh.x += sh.speed * 1.8;
+    sh.y += sh.speed * 0.7;
+    sh.alpha -= 0.025;
+    if (sh.alpha <= 0) shooters.splice(i, 1);
+  }
+  requestAnimationFrame(drawStars);
+}
+
+resizeCanvas();
+initStars();
+requestAnimationFrame(drawStars);
+window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── HUD PROGRESS BAR animation on scroll into view ──
+const hudEl = document.getElementById('hud-progress');
+const hudObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    setTimeout(() => { hudEl.style.width = '8%'; }, 600);
+    hudObserver.disconnect();
+  }
+}, { threshold: 0.5 });
+if (hudEl) hudObserver.observe(hudEl.closest('.hud-panel'));
+
+// ── MOBILE NAV ──
+function toggleNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-nav').classList.remove('open'); }
+  });
+});
+
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── PLATFORM DIAGRAM TOOLTIPS ──
+const compInfo = {
+  balao: {
+    name: 'Balão de Alta Altitude',
+    role: 'Propulsão Ascendente',
+    desc: 'Acionado a 100 m após o lançamento inicial pelo Harpia I. Responsável pela ascensão do sistema de 100 m até a altitude máxima da missão. O estouro do balão dispara automaticamente o paraquedas PAE01.',
+    specs: ['Gás: Hélio', 'Envelope expansível', 'Aciona PAE01 no estouro', 'Opera acima de 3 km']
+  },
+  pae01: {
+    name: 'PAE01 — Paraquedas',
+    role: 'Sistema de Recuperação',
+    desc: 'Acionado automaticamente após o estouro do balão na altitude máxima. Controla a descida da sonda até os 3 km, onde o Harpia I assume o controle para o pouso final.',
+    specs: ['Acionamento automático', 'Descida controlada', 'Opera MAX → 3 km', 'Redundância de ativação']
+  },
+  aspsat: {
+    name: 'AspSat — Cápsula Aspirante a Satélite',
+    role: 'Núcleo Instrumental',
+    desc: 'Núcleo científico e instrumental da sonda. Contém todo o hardware de telemetria, sensores ambientais, câmera, GPS redundante, LoRa e sistemas de energia. Projetada para operar no ambiente estratosférico extremo.',
+    specs: ['ESP32 + LoRa + GPS dual', 'Sensores BME280 + IMU', 'Câmera FPV + gravação', 'Bateria LiPo + BMS']
+  },
+  harpia: {
+    name: 'Harpia I — Drone',
+    role: 'Lançamento & Pouso Autônomo',
+    desc: 'Responsável pelo lançamento inicial (0–100 m) e estabilização ativa durante a ascensão assistida (100 m–3 km). Na descida, quando a sonda atinge 3 km com paraquedas, Harpia I retoma o controle para o pouso preciso.',
+    specs: ['Lançamento: 0 → 100 m', 'Estabilização: 100 m → 3 km', 'Pouso autônomo: 3 km → solo', 'Configuração X quad']
+  }
+};
+
+const platTooltip = document.getElementById('plat-tooltip');
+const ptName = document.getElementById('pt-name');
+const ptRole = document.getElementById('pt-role');
+const ptDesc = document.getElementById('pt-desc');
+const ptSpecs = document.getElementById('pt-specs');
+
+document.querySelectorAll('.pc-hover').forEach(el => {
+  el.addEventListener('mouseenter', function() {
+    const c = this.dataset.c;
+    const info = compInfo[c];
+    if (!info) return;
+    ptName.textContent = info.name;
+    ptRole.textContent = info.role;
+    ptDesc.textContent = info.desc;
+    ptSpecs.innerHTML = info.specs.map(s => `<span class="pt-spec">${s}</span>`).join('');
+    platTooltip.classList.add('active');
+    document.querySelectorAll('.pc-group').forEach(g => g.classList.remove('pc-lit'));
+    const grp = document.getElementById('g-' + c);
+    if (grp) grp.classList.add('pc-lit');
+  });
+});
+
+const pSvg = document.getElementById('platform-svg');
+if (pSvg) {
+  pSvg.addEventListener('mouseleave', () => {
+    platTooltip.classList.remove('active');
+    document.querySelectorAll('.pc-group').forEach(g => g.classList.remove('pc-lit'));
+  });
+}
+</script>
+</body>
 </html>
