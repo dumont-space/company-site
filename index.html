@@ -49,6 +49,7 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-
 .hero-logo-img{width:min(460px,68vw);display:block;margin:0 auto 1.8rem;animation:fadeInUp .9s .18s ease both;filter:drop-shadow(0 0 50px rgba(0,212,255,.18))}
 .footer-logo-img{height:90px;width:auto;display:block}
 .araci-prog-logo{width:160px;display:block;margin:0 auto;mix-blend-mode:screen;opacity:.92}
+.nav-tools{display:flex;align-items:center;gap:.9rem}
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:var(--tr);position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:var(--tr)}
@@ -57,6 +58,9 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-
 .nav-cta{padding:7px 18px;border:1px solid var(--cyan) !important;border-radius:4px;color:var(--cyan) !important}
 .nav-cta::after{display:none !important}
 .nav-cta:hover{background:rgba(0,212,255,.1) !important;box-shadow:0 0 18px rgba(0,212,255,.3)}
+.lang-select{min-width:148px;margin-left:.75rem;padding:8px 14px;border:1px solid rgba(0,212,255,.25);border-radius:999px;background:rgba(0,212,255,.06);color:var(--cyan);font-family:var(--font-m);font-size:.72rem;letter-spacing:.06em;cursor:pointer;transition:var(--tr);outline:none}
+.lang-select:hover,.lang-select:focus{background:rgba(0,212,255,.12);border-color:var(--border-bright);box-shadow:0 0 18px rgba(0,212,255,.16)}
+.lang-select option{background:#061020;color:#d7f5ff}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .nav-burger span{display:block;width:22px;height:1.5px;background:#fff;transition:var(--tr)}
 .mobile-nav{display:none;position:fixed;top:74px;left:0;right:0;background:rgba(2,5,16,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:999;flex-direction:column;gap:1.2rem}
@@ -291,6 +295,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 }
 @media(max-width:768px){
   .nav-links{display:none}
+  .nav{padding:0 1.25rem}
   .nav-burger{display:flex}
   .about-grid{grid-template-columns:1fr}
   .about-planet{max-width:280px;order:-1}
@@ -324,28 +329,37 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">
     <img src="images/dumont_symbol_only_transparent.png" alt="Dumont Space" class="nav-logo-img">
-    <span class="nav-logo-text">DUMONT <span>SPACE</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#tecnologia">Tecnologia</a></li>
-    <li><a href="#programas">Programas</a></li>
+    <li><a href="#sobre" data-i18n="nav.about">Sobre</a></li>
+    <li><a href="#tecnologia" data-i18n="nav.tech">Tecnologia</a></li>
+    <li><a href="#programas" data-i18n="nav.programs">Programas</a></li>
     <li><a href="#araci">Araci</a></li>
-    <li><a href="#missoes">Missões</a></li>
-    <li><a href="#aspsat">Sonda</a></li>
-    <li><a href="#araci" class="nav-cta">Explorar</a></li>
+    <li><a href="#missoes" data-i18n="nav.missions">Missões</a></li>
+    <li><a href="#aspsat" data-i18n="nav.probe">Sonda</a></li>
+    <li><a href="#araci" class="nav-cta" data-i18n="nav.explore">Explorar</a></li>
   </ul>
-  <div class="nav-burger" id="nav-burger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
+  <div class="nav-tools">
+    <select class="lang-select" id="lang-select" aria-label="Select language">
+      <option value="pt-BR">Português (BR)</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="ru">Русский</option>
+      <option value="ja">日本語</option>
+    </select>
+    <div class="nav-burger" id="nav-burger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 <div class="mobile-nav" id="mobile-nav">
-  <a href="#sobre" onclick="toggleNav()">Sobre</a>
-  <a href="#tecnologia" onclick="toggleNav()">Tecnologia</a>
-  <a href="#programas" onclick="toggleNav()">Programas</a>
-  <a href="#araci" onclick="toggleNav()">Programa Araci</a>
-  <a href="#missoes" onclick="toggleNav()">Missões</a>
-  <a href="#aspsat" onclick="toggleNav()">AspSat</a>
+  <a href="#sobre" onclick="toggleNav()" data-i18n="nav.about">Sobre</a>
+  <a href="#tecnologia" onclick="toggleNav()" data-i18n="nav.tech">Tecnologia</a>
+  <a href="#programas" onclick="toggleNav()" data-i18n="nav.programs">Programas</a>
+  <a href="#araci" onclick="toggleNav()" data-i18n="nav.araciProgram">Programa Araci</a>
+  <a href="#missoes" onclick="toggleNav()" data-i18n="nav.missions">Missões</a>
+  <a href="#aspsat" onclick="toggleNav()" data-i18n="nav.aspsat">AspSat</a>
 </div>
 
 <!-- ═══════════════ HERO ═══════════════ -->
@@ -356,19 +370,19 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="hero-content">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
-      Iniciativa Aeroespacial Experimental Brasileira
+      <span data-i18n="hero.badge">Iniciativa Aeroespacial Experimental Brasileira</span>
     </div>
     <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="hero-logo-img">
-    <p class="hero-desc">
+    <p class="hero-desc" data-i18n="hero.desc">
       Iniciativa aeroespacial experimental voltada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.
     </p>
     <div class="hero-btns">
       <a href="#araci" class="btn-p">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12,2 20,22 12,16 4,22"/></svg>
-        Programa Araci
+        <span data-i18n="hero.btnProgram">Programa Araci</span>
       </a>
-      <a href="#missoes" class="btn-s">Missões</a>
-      <a href="#sobre" class="btn-g">Explorar</a>
+      <a href="#missoes" class="btn-s" data-i18n="hero.btnMissions">Missões</a>
+      <a href="#sobre" class="btn-g" data-i18n="hero.btnExplore">Explorar</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -381,31 +395,31 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="si">
     <div class="about-grid">
       <div>
-        <p class="s-label reveal">Sobre a Dumont Space</p>
-        <h2 class="s-title reveal rd1">Engenharia<br><span>Aeroespacial</span><br>Independente</h2>
-        <div class="about-quote reveal rd2">"Antes do espaço, existe a ascensão."</div>
-        <p class="s-desc reveal rd3">
+        <p class="s-label reveal" data-i18n="about.label">Sobre a Dumont Space</p>
+        <h2 class="s-title reveal rd1" data-i18n-html="about.title">Engenharia<br><span>Aeroespacial</span><br>Independente</h2>
+        <div class="about-quote reveal rd2" data-i18n="about.quote">"Antes do espaço, existe a ascensão."</div>
+        <p class="s-desc reveal rd3" data-i18n="about.desc1">
           A Dumont Space é uma iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de sistemas, plataformas e tecnologias aeroespaciais independentes. Nossa filosofia une engenharia séria, exploração científica e evolução incremental rumo às futuras fronteiras aeroespaciais.
         </p>
-        <p class="s-desc reveal rd3" style="margin-top:1rem">
+        <p class="s-desc reveal rd3" style="margin-top:1rem" data-i18n="about.desc2">
           Desenvolvemos telemetria, sistemas embarcados, plataformas híbridas, exploração atmosférica, recuperação inteligente, autonomia e engenharia modular — tudo orientado à validação em campo e construção de experiência operacional real.
         </p>
         <div class="about-stats reveal rd4">
           <div class="about-stat">
             <span class="about-stat-val">50 km+</span>
-            <span class="about-stat-lbl">Altitude alvo estratosférica</span>
+            <span class="about-stat-lbl" data-i18n="about.stat1">Altitude alvo estratosférica</span>
           </div>
           <div class="about-stat">
             <span class="about-stat-val">6</span>
-            <span class="about-stat-lbl">Fases do Programa Araci</span>
+            <span class="about-stat-lbl" data-i18n="about.stat2">Fases do Programa Araci</span>
           </div>
           <div class="about-stat">
             <span class="about-stat-val">100%</span>
-            <span class="about-stat-lbl">Tecnologia Nacional</span>
+            <span class="about-stat-lbl" data-i18n="about.stat3">Tecnologia Nacional</span>
           </div>
           <div class="about-stat">
             <span class="about-stat-val">2026</span>
-            <span class="about-stat-lbl">Primeiros testes em voo</span>
+            <span class="about-stat-lbl" data-i18n="about.stat4">Primeiros testes em voo</span>
           </div>
         </div>
       </div>
@@ -433,40 +447,40 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 <section class="tech" id="tecnologia">
   <div class="si">
     <div style="text-align:center;max-width:580px;margin:0 auto">
-      <p class="s-label reveal" style="justify-content:center">Capacidades Tecnológicas</p>
-      <h2 class="s-title reveal rd1" style="text-align:center">Domínios de <span>Engenharia</span></h2>
-      <p class="s-desc reveal rd2" style="margin:0 auto">Infraestrutura tecnológica modular desenvolvida para suportar missões aeroespaciais experimentais reais.</p>
+      <p class="s-label reveal" style="justify-content:center" data-i18n="tech.label">Capacidades Tecnológicas</p>
+      <h2 class="s-title reveal rd1" style="text-align:center" data-i18n-html="tech.title">Domínios de <span>Engenharia</span></h2>
+      <p class="s-desc reveal rd2" style="margin:0 auto" data-i18n="tech.desc">Infraestrutura tecnológica modular desenvolvida para suportar missões aeroespaciais experimentais reais.</p>
     </div>
     <div class="tech-grid">
       <div class="tc reveal rd1">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
-        <h3 class="tc-title">Engenharia Experimental</h3>
-        <p class="tc-desc">Desenvolvimento iterativo de hardware e software aeroespacial com foco em validação prática e evolução incremental em campo real.</p>
+        <h3 class="tc-title" data-i18n="tech.card1.title">Engenharia Experimental</h3>
+        <p class="tc-desc" data-i18n="tech.card1.desc">Desenvolvimento iterativo de hardware e software aeroespacial com foco em validação prática e evolução incremental em campo real.</p>
       </div>
       <div class="tc reveal rd2">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <h3 class="tc-title">Telemetria</h3>
-        <p class="tc-desc">Sistemas de aquisição, transmissão e monitoramento de dados em tempo real via RF, LoRa e protocolos redundantes de comunicação.</p>
+        <h3 class="tc-title" data-i18n="tech.card2.title">Telemetria</h3>
+        <p class="tc-desc" data-i18n="tech.card2.desc">Sistemas de aquisição, transmissão e monitoramento de dados em tempo real via RF, LoRa e protocolos redundantes de comunicação.</p>
       </div>
       <div class="tc reveal rd3">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <h3 class="tc-title">Exploração Estratosférica</h3>
-        <p class="tc-desc">Plataformas de alta altitude para operar em ambiente estratosférico extremo, com pressão reduzida, frio intenso e radiação elevada.</p>
+        <h3 class="tc-title" data-i18n="tech.card3.title">Exploração Estratosférica</h3>
+        <p class="tc-desc" data-i18n="tech.card3.desc">Plataformas de alta altitude para operar em ambiente estratosférico extremo, com pressão reduzida, frio intenso e radiação elevada.</p>
       </div>
       <div class="tc reveal rd4">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3 class="tc-title">Sistemas Embarcados</h3>
-        <p class="tc-desc">Arquitetura modular baseada em microcontroladores de baixo consumo, firmware robusto e integração multi-sensor para ambientes hostis.</p>
+        <h3 class="tc-title" data-i18n="tech.card4.title">Sistemas Embarcados</h3>
+        <p class="tc-desc" data-i18n="tech.card4.desc">Arquitetura modular baseada em microcontroladores de baixo consumo, firmware robusto e integração multi-sensor para ambientes hostis.</p>
       </div>
       <div class="tc reveal rd5">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 class="tc-title">Recuperação Inteligente</h3>
-        <p class="tc-desc">Sistemas de recuperação de payload com lógica autônoma, redundância estrutural, GPS ativo e sequência de descida controlada.</p>
+        <h3 class="tc-title" data-i18n="tech.card5.title">Recuperação Inteligente</h3>
+        <p class="tc-desc" data-i18n="tech.card5.desc">Sistemas de recuperação de payload com lógica autônoma, redundância estrutural, GPS ativo e sequência de descida controlada.</p>
       </div>
       <div class="tc reveal rd6">
         <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-        <h3 class="tc-title">Autonomia Supervisionada</h3>
-        <p class="tc-desc">Lógica de decisão embarcada com supervisão remota, failsafe configurável e gestão autônoma de energia e comunicação.</p>
+        <h3 class="tc-title" data-i18n="tech.card6.title">Autonomia Supervisionada</h3>
+        <p class="tc-desc" data-i18n="tech.card6.desc">Lógica de decisão embarcada com supervisão remota, failsafe configurável e gestão autônoma de energia e comunicação.</p>
       </div>
     </div>
   </div>
@@ -477,9 +491,9 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 <!-- ═══════════════ PROGRAMS ═══════════════ -->
 <section class="programs" id="programas">
   <div class="si">
-    <p class="s-label reveal">Programas Aeroespaciais</p>
-    <h2 class="s-title reveal rd1">Programas <span>Ativos</span></h2>
-    <p class="s-desc reveal rd2">Iniciativas estruturadas para o desenvolvimento progressivo de tecnologias aeroespaciais brasileiras.</p>
+    <p class="s-label reveal" data-i18n="programs.label">Programas Aeroespaciais</p>
+    <h2 class="s-title reveal rd1" data-i18n-html="programs.title">Programas <span>Ativos</span></h2>
+    <p class="s-desc reveal rd2" data-i18n="programs.desc">Iniciativas estruturadas para o desenvolvimento progressivo de tecnologias aeroespaciais brasileiras.</p>
 
     <div class="prog-card reveal rd2" onclick="scrollTo('araci')">
       <div class="prog-card-bg"></div>
@@ -489,14 +503,14 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
       <div class="prog-card-in">
         <div class="prog-badge">
           <span style="width:6px;height:6px;background:#00ff88;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block"></span>
-          PROGRAMA ATIVO — 2026
+          <span data-i18n="programs.card.badge">PROGRAMA ATIVO — 2026</span>
         </div>
-        <h3 class="prog-title">Programa Araci</h3>
-        <p class="prog-subtitle">Exploração Estratosférica Experimental</p>
-        <p class="prog-desc">
+        <h3 class="prog-title" data-i18n="programs.card.title">Programa Araci</h3>
+        <p class="prog-subtitle" data-i18n="programs.card.subtitle">Exploração Estratosférica Experimental</p>
+        <p class="prog-desc" data-i18n="programs.card.desc">
           Primeiro grande programa aeroespacial da Dumont Space, focado no desenvolvimento progressivo de tecnologias atmosféricas, plataformas near-space e sistemas embarcados de alta altitude.
         </p>
-        <div class="prog-tags">
+        <div class="prog-tags" data-i18n-html="programs.card.tags">
           <span class="prog-tag">Estratosfera</span>
           <span class="prog-tag">Near-Space</span>
           <span class="prog-tag">Telemetria</span>
@@ -506,7 +520,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
         </div>
         <button class="btn-p" onclick="event.stopPropagation();document.getElementById('araci').scrollIntoView({behavior:'smooth'})">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-          Explorar Programa
+          <span data-i18n="programs.card.button">Explorar Programa</span>
         </button>
       </div>
     </div>
@@ -521,21 +535,21 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 
     <div class="araci-hero">
       <div>
-        <p class="s-label reveal">Programa Aeroespacial</p>
-        <h2 class="s-title reveal rd1">Programa <span>Araci</span></h2>
-        <p class="s-desc reveal rd2">
+        <p class="s-label reveal" data-i18n="araci.label">Programa Aeroespacial</p>
+        <h2 class="s-title reveal rd1" data-i18n-html="araci.title">Programa <span>Araci</span></h2>
+        <p class="s-desc reveal rd2" data-i18n="araci.desc1">
           O Programa Araci é a primeira grande etapa da jornada aeroespacial da Dumont Space — a fundação tecnológica que permitirá evoluções progressivamente mais ambiciosas rumo à estratosfera e além.
         </p>
-        <blockquote class="araci-quote reveal rd3">
+        <blockquote class="araci-quote reveal rd3" data-i18n-html="araci.quote">
           "<span>Antes do espaço,</span> existe a ascensão."
         </blockquote>
-        <p class="s-desc reveal rd4" style="margin-bottom:.9rem">
+        <p class="s-desc reveal rd4" style="margin-bottom:.9rem" data-i18n-html="araci.desc2">
           O nome <strong style="color:var(--cyan)">Araci</strong> tem raízes na língua Tupi e remete à <em>mãe do dia</em> — aurora, nascimento da luz, início do céu iluminado. A estratosfera é tratada como o primeiro território aeroespacial da Dumont Space.
         </p>
-        <p class="s-desc reveal rd4">
+        <p class="s-desc reveal rd4" data-i18n="araci.desc3">
           A filosofia central: dominar a atmosfera antes do espaço. Desenvolver tecnologia camada por camada, validar sistemas progressivamente, construir infraestrutura própria e criar conhecimento aeroespacial real.
         </p>
-        <p class="araci-mono reveal rd5">
+        <p class="araci-mono reveal rd5" data-i18n-html="araci.objectives">
           OBJETIVOS — domínio atmosférico · telemetria · sistemas embarcados<br>near-space · autonomia · recuperação inteligente · alta altitude
         </p>
       </div>
@@ -545,41 +559,41 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
           <img src="images/Araci_Logo.png" alt="Programa Araci" class="araci-prog-logo">
         </div>
         <div class="hud-row">
-          <span class="hud-lbl">Fase Atual</span>
-          <span class="hud-val">FASE 0 — DEV</span>
+          <span class="hud-lbl" data-i18n="araci.hud.phaseLabel">Fase Atual</span>
+          <span class="hud-val" data-i18n="araci.hud.phaseValue">FASE 0 — DEV</span>
         </div>
         <div class="hud-row">
-          <span class="hud-lbl">Status</span>
-          <span class="hud-val" style="color:#00ff88">● ACTIVE</span>
+          <span class="hud-lbl" data-i18n="araci.hud.statusLabel">Status</span>
+          <span class="hud-val" style="color:#00ff88" data-i18n="araci.hud.statusValue">● ACTIVE</span>
         </div>
         <div class="hud-row">
-          <span class="hud-lbl">Altitude Alvo</span>
+          <span class="hud-lbl" data-i18n="araci.hud.targetAltitudeLabel">Altitude Alvo</span>
           <span class="hud-val">50 km+</span>
         </div>
         <div class="hud-row">
-          <span class="hud-lbl">Plataforma</span>
-          <span class="hud-val">Sonda Araci-1</span>
+          <span class="hud-lbl" data-i18n="araci.hud.platformLabel">Plataforma</span>
+          <span class="hud-val" data-i18n="araci.hud.platformValue">Sonda Araci-1</span>
         </div>
         <div class="hud-row">
-          <span class="hud-lbl">Missões Planejadas</span>
+          <span class="hud-lbl" data-i18n="araci.hud.missionsLabel">Missões Planejadas</span>
           <span class="hud-val">4</span>
         </div>
         <div class="hud-row" style="border-bottom:none">
-          <span class="hud-lbl">Progresso Geral</span>
+          <span class="hud-lbl" data-i18n="araci.hud.progressLabel">Progresso Geral</span>
           <div class="hud-bar"><div class="hud-bar-fill" id="hud-progress" style="width:0%"></div></div>
         </div>
 
         <div style="margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)">
-          <div style="font-family:var(--font-m);font-size:.63rem;letter-spacing:.15em;color:var(--text-muted);margin-bottom:1rem">ALTITUDE PROGRESSION</div>
+          <div style="font-family:var(--font-m);font-size:.63rem;letter-spacing:.15em;color:var(--text-muted);margin-bottom:1rem" data-i18n="araci.hud.altitudeProgress">ALTITUDE PROGRESSION</div>
           <div style="display:flex;flex-direction:column;gap:.55rem">
-            <div class="alt-row"><div class="alt-lbl">50 km+</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 5</div></div>
-            <div class="alt-row"><div class="alt-lbl">30 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 4</div></div>
-            <div class="alt-row"><div class="alt-lbl">12 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 3</div></div>
-            <div class="alt-row"><div class="alt-lbl">3 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph">Fase 1</div></div>
+            <div class="alt-row"><div class="alt-lbl">50 km+</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph" data-i18n="araci.hud.phase5">Fase 5</div></div>
+            <div class="alt-row"><div class="alt-lbl">30 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph" data-i18n="araci.hud.phase4">Fase 4</div></div>
+            <div class="alt-row"><div class="alt-lbl">12 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph" data-i18n="araci.hud.phase3">Fase 3</div></div>
+            <div class="alt-row"><div class="alt-lbl">3 km</div><div class="alt-bar"><div class="alt-bar-fill" style="width:0%"></div></div><div class="alt-ph" data-i18n="araci.hud.phase1">Fase 1</div></div>
           </div>
         </div>
 
-        <p style="font-family:var(--font-h);font-size:.92rem;font-weight:600;color:var(--cyan);margin-top:2rem;text-align:center;letter-spacing:.05em;opacity:.9">
+        <p style="font-family:var(--font-h);font-size:.92rem;font-weight:600;color:var(--cyan);margin-top:2rem;text-align:center;letter-spacing:.05em;opacity:.9" data-i18n="araci.hud.quote">
           "O céu é apenas o começo."
         </p>
       </div>
@@ -588,9 +602,9 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
     <!-- TIMELINE -->
     <div style="margin-top:5rem">
       <div style="text-align:center;margin-bottom:3.8rem">
-        <p class="s-label reveal" style="justify-content:center">Roadmap do Programa</p>
-        <h2 class="s-title reveal rd1" style="text-align:center">Fases de <span>Desenvolvimento</span></h2>
-        <p class="s-desc reveal rd2" style="margin:0 auto;text-align:center">Seis fases progressivas, cada uma construindo sobre a anterior rumo ao domínio estratosférico completo.</p>
+        <p class="s-label reveal" style="justify-content:center" data-i18n="timeline.label">Roadmap do Programa</p>
+        <h2 class="s-title reveal rd1" style="text-align:center" data-i18n-html="timeline.title">Fases de <span>Desenvolvimento</span></h2>
+        <p class="s-desc reveal rd2" style="margin:0 auto;text-align:center" data-i18n="timeline.desc">Seis fases progressivas, cada uma construindo sobre a anterior rumo ao domínio estratosférico completo.</p>
       </div>
 
       <div class="tl-wrap">
@@ -599,13 +613,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
         <!-- FASE 0 -->
         <div class="tl-item reveal">
           <div class="tl-content">
-            <div class="tl-phase">Fase 0</div>
+            <div class="tl-phase" data-i18n="timeline.phase0.label">Fase 0</div>
             <div class="tl-card">
-              <div class="badge b-active"><span class="badge-dot"></span>ACTIVE</div>
-              <h4 class="tl-card-title">Desenvolvimento Terrestre</h4>
-              <div class="tl-alt">Bancada — Ambiente Controlado</div>
-              <p class="tl-card-desc">Desenvolvimento e validação completa de todos os subsistemas em ambiente terrestre controlado antes da primeira missão de voo.</p>
-              <div class="tl-tags">
+              <div class="badge b-active"><span class="badge-dot"></span><span data-i18n="timeline.badge.active">ACTIVE</span></div>
+              <h4 class="tl-card-title" data-i18n="timeline.phase0.title">Desenvolvimento Terrestre</h4>
+              <div class="tl-alt" data-i18n="timeline.phase0.alt">Bancada — Ambiente Controlado</div>
+              <p class="tl-card-desc" data-i18n="timeline.phase0.desc">Desenvolvimento e validação completa de todos os subsistemas em ambiente terrestre controlado antes da primeira missão de voo.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase0.tags">
                 <span class="tl-tag">Bancada</span><span class="tl-tag">Energia</span><span class="tl-tag">RF</span>
                 <span class="tl-tag">EMI</span><span class="tl-tag">GPS</span><span class="tl-tag">LoRa</span>
                 <span class="tl-tag">Firmware</span><span class="tl-tag">Sensores</span><span class="tl-tag">Integração</span>
@@ -621,13 +635,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
           <div class="tl-empty"></div>
           <div class="tl-node"><div class="tl-dot"></div></div>
           <div class="tl-content">
-            <div class="tl-phase">Fase 1</div>
+            <div class="tl-phase" data-i18n="timeline.phase1.label">Fase 1</div>
             <div class="tl-card">
-              <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
-              <h4 class="tl-card-title">Baixa Altitude</h4>
+              <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
+              <h4 class="tl-card-title" data-i18n="timeline.phase1.title">Baixa Altitude</h4>
               <div class="tl-alt">100 m · 500 m · 1 km · 3 km</div>
-              <p class="tl-card-desc">Primeiros voos de teste em baixa altitude para validação de recuperação, tracking, telemetria e comportamento de voo real.</p>
-              <div class="tl-tags">
+              <p class="tl-card-desc" data-i18n="timeline.phase1.desc">Primeiros voos de teste em baixa altitude para validação de recuperação, tracking, telemetria e comportamento de voo real.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase1.tags">
                 <span class="tl-tag">Recuperação</span><span class="tl-tag">Tracking</span>
                 <span class="tl-tag">Telemetria</span><span class="tl-tag">Validação de Voo</span>
               </div>
@@ -638,13 +652,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
         <!-- FASE 2 -->
         <div class="tl-item reveal rd2">
           <div class="tl-content">
-            <div class="tl-phase">Fase 2</div>
+            <div class="tl-phase" data-i18n="timeline.phase2.label">Fase 2</div>
             <div class="tl-card">
-              <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
-              <h4 class="tl-card-title">Alta Atmosfera Inicial</h4>
+              <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
+              <h4 class="tl-card-title" data-i18n="timeline.phase2.title">Alta Atmosfera Inicial</h4>
               <div class="tl-alt">5 km · 8 km · 10 km</div>
-              <p class="tl-card-desc">Entrada no regime de alta atmosfera. Validação sob condições de frio extremo, pressão reduzida e comunicação de longa distância.</p>
-              <div class="tl-tags">
+              <p class="tl-card-desc" data-i18n="timeline.phase2.desc">Entrada no regime de alta atmosfera. Validação sob condições de frio extremo, pressão reduzida e comunicação de longa distância.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase2.tags">
                 <span class="tl-tag">Frio Extremo</span><span class="tl-tag">Pressão</span>
                 <span class="tl-tag">Comunicação</span><span class="tl-tag">Operação Atmosférica</span>
               </div>
@@ -659,13 +673,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
           <div class="tl-empty"></div>
           <div class="tl-node"><div class="tl-dot"></div></div>
           <div class="tl-content">
-            <div class="tl-phase">Fase 3</div>
+            <div class="tl-phase" data-i18n="timeline.phase3.label">Fase 3</div>
             <div class="tl-card" style="border-color:rgba(0,212,255,.32);background:rgba(0,50,120,.14)">
-              <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
-              <h4 class="tl-card-title" style="color:var(--cyan)">Entrada Estratosférica</h4>
-              <div class="tl-alt" style="color:#fff;font-weight:600">★ CRUZAR 12 km — Marco Histórico</div>
-              <p class="tl-card-desc"><strong style="color:#fff">Milestone oficial do Programa Araci.</strong> A missão Araci S-01 marca a primeira entrada da Dumont Space no regime estratosférico — evento histórico da organização.</p>
-              <div class="tl-tags">
+              <div class="badge b-milestone"><span class="badge-dot"></span><span data-i18n="timeline.badge.milestone">MILESTONE</span></div>
+              <h4 class="tl-card-title" style="color:var(--cyan)" data-i18n="timeline.phase3.title">Entrada Estratosférica</h4>
+              <div class="tl-alt" style="color:#fff;font-weight:600" data-i18n="timeline.phase3.alt">★ CRUZAR 12 km — Marco Histórico</div>
+              <p class="tl-card-desc" data-i18n-html="timeline.phase3.desc"><strong style="color:#fff">Milestone oficial do Programa Araci.</strong> A missão Araci S-01 marca a primeira entrada da Dumont Space no regime estratosférico — evento histórico da organização.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase3.tags">
                 <span class="tl-tag" style="border-color:rgba(0,212,255,.4);color:var(--cyan)">12 km+</span>
                 <span class="tl-tag">Estratosfera</span><span class="tl-tag">Milestone</span><span class="tl-tag">2028</span>
               </div>
@@ -676,13 +690,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
         <!-- FASE 4 -->
         <div class="tl-item reveal rd2">
           <div class="tl-content">
-            <div class="tl-phase">Fase 4</div>
+            <div class="tl-phase" data-i18n="timeline.phase4.label">Fase 4</div>
             <div class="tl-card">
-              <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
-              <h4 class="tl-card-title">Estratosfera Operacional</h4>
+              <div class="badge b-future"><span class="badge-dot"></span><span data-i18n="timeline.badge.future">FUTURE</span></div>
+              <h4 class="tl-card-title" data-i18n="timeline.phase4.title">Estratosfera Operacional</h4>
               <div class="tl-alt">15 km — 25 km</div>
-              <p class="tl-card-desc">Operação contínua no envelope estratosférico com foco em estabilidade de sistemas, autonomia prolongada, redundância e recuperação avançada.</p>
-              <div class="tl-tags">
+              <p class="tl-card-desc" data-i18n="timeline.phase4.desc">Operação contínua no envelope estratosférico com foco em estabilidade de sistemas, autonomia prolongada, redundância e recuperação avançada.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase4.tags">
                 <span class="tl-tag">Estabilidade</span><span class="tl-tag">Autonomia</span>
                 <span class="tl-tag">Redundância</span><span class="tl-tag">Recuperação Avançada</span>
               </div>
@@ -697,13 +711,13 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
           <div class="tl-empty"></div>
           <div class="tl-node"><div class="tl-dot"></div></div>
           <div class="tl-content">
-            <div class="tl-phase">Fase 5</div>
+            <div class="tl-phase" data-i18n="timeline.phase5.label">Fase 5</div>
             <div class="tl-card">
-              <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
-              <h4 class="tl-card-title">Estratosfera Profunda</h4>
+              <div class="badge b-future"><span class="badge-dot"></span><span data-i18n="timeline.badge.future">FUTURE</span></div>
+              <h4 class="tl-card-title" data-i18n="timeline.phase5.title">Estratosfera Profunda</h4>
               <div class="tl-alt">30 km — 50 km</div>
-              <p class="tl-card-desc">Domínio completo do envelope estratosférico. Near-space, arquitetura madura e envelope expansion rumo às fronteiras do espaço.</p>
-              <div class="tl-tags">
+              <p class="tl-card-desc" data-i18n="timeline.phase5.desc">Domínio completo do envelope estratosférico. Near-space, arquitetura madura e envelope expansion rumo às fronteiras do espaço.</p>
+              <div class="tl-tags" data-i18n-html="timeline.phase5.tags">
                 <span class="tl-tag">Near-Space</span><span class="tl-tag">50 km+</span>
                 <span class="tl-tag">Envelope Expansion</span><span class="tl-tag">Arquitetura Madura</span>
               </div>
@@ -721,31 +735,31 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 <!-- ═══════════════ MISSIONS ═══════════════ -->
 <section class="missions" id="missoes">
   <div class="si">
-    <p class="s-label reveal">Operações</p>
-    <h2 class="s-title reveal rd1">Missões <span>Araci</span></h2>
-    <p class="s-desc reveal rd2">Sequência completa de missões de bancada da Fase 0 — validação terrestre progressiva antes dos primeiros voos.</p>
+    <p class="s-label reveal" data-i18n="missions.label">Operações</p>
+    <h2 class="s-title reveal rd1" data-i18n-html="missions.title">Missões <span>Araci</span></h2>
+    <p class="s-desc reveal rd2" data-i18n="missions.desc">Sequência completa de missões de bancada da Fase 0 — validação terrestre progressiva antes dos primeiros voos.</p>
 
     <!-- ── FASE 0 ACTIVE ── -->
     <div style="margin-top:3rem">
       <div class="m-section-hdr reveal" style="color:#00ff88">
-        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">● Em Andamento — Fase 0</span>
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase" data-i18n="missions.sectionActive">● Em Andamento — Fase 0</span>
         <div style="flex:1;height:1px;background:rgba(0,255,100,.13)"></div>
       </div>
       <div class="m-grid-3">
 
         <div class="m-card m-card-sm reveal rd1" style="border-color:rgba(0,255,100,.18)">
           <div class="m-header">
-            <div><div class="m-id">AR-T01</div><div class="m-name">Telemetria Inicial</div></div>
-            <div class="badge b-active"><span class="badge-dot"></span>ACTIVE</div>
+            <div><div class="m-id">AR-T01</div><div class="m-name" data-i18n="missions.t01.title">Telemetria Inicial</div></div>
+            <div class="badge b-active"><span class="badge-dot"></span><span data-i18n="timeline.badge.active">ACTIVE</span></div>
           </div>
-          <p class="m-desc">Primeiro teste LoRa — envio, recepção, RSSI, latência e integridade de pacotes em solo.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t01.desc">Primeiro teste LoRa — envio, recepção, RSSI, latência e integridade de pacotes em solo.</p>
+          <ul class="m-obj" data-i18n-html="missions.t01.obj">
             <li>Envio e recepção LoRa</li>
             <li>Medição de RSSI e latência</li>
             <li>Integridade de pacotes</li>
           </ul>
-          <p class="mc-crit">Comunicação estável em solo</p>
-          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(0,255,100,.75)">Em Andamento</span></div>
+          <p class="mc-crit" data-i18n="missions.t01.crit">Comunicação estável em solo</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(0,255,100,.75)" data-i18n="missions.status.inProgress">Em Andamento</span></div>
         </div>
 
       </div>
@@ -754,265 +768,265 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
     <!-- ── FASE 0 PLANNED ── -->
     <div style="margin-top:2.5rem">
       <div class="m-section-hdr reveal" style="color:rgba(150,185,255,.7)">
-        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">◈ Planejadas — Fase 0</span>
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase" data-i18n="missions.sectionPlanned">◈ Planejadas — Fase 0</span>
         <div style="flex:1;height:1px;background:rgba(100,150,255,.12)"></div>
       </div>
       <div class="m-grid-3">
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T02</div><div class="m-name">Sensores Ambientais</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T02</div><div class="m-name" data-i18n="missions.t02.title">Sensores Ambientais</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Validação de BME280, IMU e leitura contínua de sensores ambientais.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t02.desc">Validação de BME280, IMU e leitura contínua de sensores ambientais.</p>
+          <ul class="m-obj" data-i18n-html="missions.t02.obj">
             <li>BME280 — pressão, temp, umidade</li>
             <li>IMU — aceleração e orientação</li>
             <li>Leitura contínua estável</li>
           </ul>
-          <p class="mc-crit">Leitura estável e coerente</p>
-          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t02.crit">Leitura estável e coerente</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2">
           <div class="m-header">
-            <div><div class="m-id">AR-T03</div><div class="m-name">Logging Local</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T03</div><div class="m-name" data-i18n="missions.t03.title">Logging Local</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Validação de gravação em SD — integridade, timestamps, corrupção e recuperação de arquivos.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t03.desc">Validação de gravação em SD — integridade, timestamps, corrupção e recuperação de arquivos.</p>
+          <ul class="m-obj" data-i18n-html="missions.t03.obj">
             <li>Integridade dos arquivos</li>
             <li>Timestamps corretos</li>
             <li>Recuperação pós-corrupção</li>
           </ul>
-          <p class="mc-crit">Logs persistentes sem corrupção</p>
-          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t03.crit">Logs persistentes sem corrupção</p>
+          <div class="m-footer"><span class="m-date">Q3 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd3">
           <div class="m-header">
-            <div><div class="m-id">AR-T04</div><div class="m-name">GPS Lock</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T04</div><div class="m-name" data-i18n="missions.t04.title">GPS Lock</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Validação do GPS NEO-M8N — aquisição de satélites, estabilidade, precisão, cold e hot start.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t04.desc">Validação do GPS NEO-M8N — aquisição de satélites, estabilidade, precisão, cold e hot start.</p>
+          <ul class="m-obj" data-i18n-html="missions.t04.obj">
             <li>Aquisição de satélites</li>
             <li>Cold start / hot start</li>
             <li>Precisão e estabilidade de fix</li>
           </ul>
-          <p class="mc-crit">Fix confiável e repetível</p>
-          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t04.crit">Fix confiável e repetível</p>
+          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T07</div><div class="m-name">Energia Integrada</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T07</div><div class="m-name" data-i18n="missions.t07.title">Energia Integrada</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Validação da arquitetura energética completa — reguladores, ripple, consumo, autonomia e aquecimento.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t07.desc">Validação da arquitetura energética completa — reguladores, ripple, consumo, autonomia e aquecimento.</p>
+          <ul class="m-obj" data-i18n-html="missions.t07.obj">
             <li>Reguladores e ripple</li>
             <li>Consumo e autonomia</li>
             <li>Aquecimento dos componentes</li>
           </ul>
-          <p class="mc-crit">Estabilidade energética completa</p>
-          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t07.crit">Estabilidade energética completa</p>
+          <div class="m-footer"><span class="m-date">Q4 2026</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2">
           <div class="m-header">
-            <div><div class="m-id">AR-T08</div><div class="m-name">RF Coexistence I</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T08</div><div class="m-name" data-i18n="missions.t08.title">RF Coexistence I</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeiro teste de coexistência RF — LoRa + GPS e ESP32, com avaliação de ruído elétrico.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t08.desc">Primeiro teste de coexistência RF — LoRa + GPS e ESP32, com avaliação de ruído elétrico.</p>
+          <ul class="m-obj" data-i18n-html="missions.t08.obj">
             <li>LoRa + GPS simultâneos</li>
             <li>ESP32 + RF</li>
             <li>Avaliação de ruído elétrico</li>
           </ul>
-          <p class="mc-crit">GPS continua funcional com LoRa ativo</p>
-          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t08.crit">GPS continua funcional com LoRa ativo</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd3">
           <div class="m-header">
-            <div><div class="m-id">AR-T09</div><div class="m-name">VTX Activation</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T09</div><div class="m-name" data-i18n="missions.t09.title">VTX Activation</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeira ativação do VTX FPV — vídeo, alcance, temperatura e alimentação.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t09.desc">Primeira ativação do VTX FPV — vídeo, alcance, temperatura e alimentação.</p>
+          <ul class="m-obj" data-i18n-html="missions.t09.obj">
             <li>Primeira transmissão de vídeo</li>
             <li>Alcance e qualidade de sinal</li>
             <li>Temperatura e alimentação</li>
           </ul>
-          <p class="mc-crit">Transmissão estável</p>
-          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t09.crit">Transmissão estável</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T10</div><div class="m-name">RF Coexistence II</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T10</div><div class="m-name" data-i18n="missions.t10.title">RF Coexistence II</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Teste RF completo com coexistência de VTX, GPS, LoRa e ESP32 simultâneos.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t10.desc">Teste RF completo com coexistência de VTX, GPS, LoRa e ESP32 simultâneos.</p>
+          <ul class="m-obj" data-i18n-html="missions.t10.obj">
             <li>VTX + GPS + LoRa + ESP32</li>
             <li>Interferências e EMI</li>
             <li>Operação simultânea completa</li>
           </ul>
-          <p class="mc-crit">Operação simultânea funcional</p>
-          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t10.crit">Operação simultânea funcional</p>
+          <div class="m-footer"><span class="m-date">Q1 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2">
           <div class="m-header">
-            <div><div class="m-id">AR-T11</div><div class="m-name">Estrutura Física Alpha</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T11</div><div class="m-name" data-i18n="missions.t11.title">Estrutura Física Alpha</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeira integração física real — distribuição interna, centro de massa, cabeamento e ventilação.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t11.desc">Primeira integração física real — distribuição interna, centro de massa, cabeamento e ventilação.</p>
+          <ul class="m-obj" data-i18n-html="missions.t11.obj">
             <li>Distribuição interna dos módulos</li>
             <li>Centro de massa</li>
             <li>Cabeamento e ventilação</li>
           </ul>
-          <p class="mc-crit">Arquitetura física coerente</p>
-          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t11.crit">Arquitetura física coerente</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd3">
           <div class="m-header">
-            <div><div class="m-id">AR-T12</div><div class="m-name">Térmica Passiva</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T12</div><div class="m-name" data-i18n="missions.t12.title">Térmica Passiva</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Avaliação de aquecimento interno — VTX, reguladores e bateria em operação real.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t12.desc">Avaliação de aquecimento interno — VTX, reguladores e bateria em operação real.</p>
+          <ul class="m-obj" data-i18n-html="missions.t12.obj">
             <li>Temperatura do VTX</li>
             <li>Reguladores em carga</li>
             <li>Bateria sob ciclo</li>
           </ul>
-          <p class="mc-crit">Temperaturas em limites aceitáveis</p>
-          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t12.crit">Temperaturas em limites aceitáveis</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T13</div><div class="m-name">Runtime Test</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T13</div><div class="m-name" data-i18n="missions.t13.title">Runtime Test</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Operação contínua de várias horas — estabilidade, travamentos, resets e watchdog.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t13.desc">Operação contínua de várias horas — estabilidade, travamentos, resets e watchdog.</p>
+          <ul class="m-obj" data-i18n-html="missions.t13.obj">
             <li>Operação contínua prolongada</li>
             <li>Travamentos e resets</li>
             <li>Watchdog de hardware</li>
           </ul>
-          <p class="mc-crit">Operação contínua estável</p>
-          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t13.crit">Operação contínua estável</p>
+          <div class="m-footer"><span class="m-date">Q2 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2">
           <div class="m-header">
-            <div><div class="m-id">AR-T14</div><div class="m-name">Recovery Systems</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T14</div><div class="m-name" data-i18n="missions.t14.title">Recovery Systems</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Validação de nichrome, acionamentos, MOSFETs e lógica de emergência do sistema de recuperação.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t14.desc">Validação de nichrome, acionamentos, MOSFETs e lógica de emergência do sistema de recuperação.</p>
+          <ul class="m-obj" data-i18n-html="missions.t14.obj">
             <li>Fio nichrome e queima</li>
             <li>MOSFETs de acionamento</li>
             <li>Lógica de emergência</li>
           </ul>
-          <p class="mc-crit">Acionamento confiável e repetível</p>
-          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t14.crit">Acionamento confiável e repetível</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd3">
           <div class="m-header">
-            <div><div class="m-id">AR-T15</div><div class="m-name">Ground Station Alpha</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T15</div><div class="m-name" data-i18n="missions.t15.title">Ground Station Alpha</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeira estação de solo funcional — recepção, interface, mapas e logging operacional.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t15.desc">Primeira estação de solo funcional — recepção, interface, mapas e logging operacional.</p>
+          <ul class="m-obj" data-i18n-html="missions.t15.obj">
             <li>Recepção de telemetria</li>
             <li>Interface e mapas</li>
             <li>Logging de missão</li>
           </ul>
-          <p class="mc-crit">Acompanhamento operacional em tempo real</p>
-          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t15.crit">Acompanhamento operacional em tempo real</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T16</div><div class="m-name">Full Stack Integration</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T16</div><div class="m-name" data-i18n="missions.t16.title">Full Stack Integration</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeira integração COMPLETA — GPS, LoRa, sensores, VTX, SD, energia e firmware todos ativos.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t16.desc">Primeira integração COMPLETA — GPS, LoRa, sensores, VTX, SD, energia e firmware todos ativos.</p>
+          <ul class="m-obj" data-i18n-html="missions.t16.obj">
             <li>Todos os subsistemas ativos</li>
             <li>Firmware integrado</li>
             <li>Telemetria end-to-end</li>
           </ul>
-          <p class="mc-crit">Sistema completo funcional</p>
-          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t16.crit">Sistema completo funcional</p>
+          <div class="m-footer"><span class="m-date">Q3 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2">
           <div class="m-header">
-            <div><div class="m-id">AR-T17</div><div class="m-name">Mobility Test</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T17</div><div class="m-name" data-i18n="missions.t17.title">Mobility Test</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Simulação de missão em movimento — veículo, deslocamento, tracking e RF dinâmico.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t17.desc">Simulação de missão em movimento — veículo, deslocamento, tracking e RF dinâmico.</p>
+          <ul class="m-obj" data-i18n-html="missions.t17.obj">
             <li>Tracking em veículo</li>
             <li>RF dinâmico em deslocamento</li>
             <li>Telemetria em movimento</li>
           </ul>
-          <p class="mc-crit">Telemetria funcional em movimento</p>
-          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t17.crit">Telemetria funcional em movimento</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd3">
           <div class="m-header">
-            <div><div class="m-id">AR-T18</div><div class="m-name">Field Operations</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T18</div><div class="m-name" data-i18n="missions.t18.title">Field Operations</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Primeira operação completa em campo — checklist, energização, operação e recuperação simulada.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t18.desc">Primeira operação completa em campo — checklist, energização, operação e recuperação simulada.</p>
+          <ul class="m-obj" data-i18n-html="missions.t18.obj">
             <li>Checklist pré-missão</li>
             <li>Energização e operação</li>
             <li>Recuperação simulada</li>
           </ul>
-          <p class="mc-crit">Operação organizada e documentada</p>
-          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t18.crit">Operação organizada e documentada</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">AR-T19</div><div class="m-name">Failure Simulation</div></div>
-            <div class="badge b-planned"><span class="badge-dot"></span>PLANNED</div>
+            <div><div class="m-id">AR-T19</div><div class="m-name" data-i18n="missions.t19.title">Failure Simulation</div></div>
+            <div class="badge b-planned"><span class="badge-dot"></span><span data-i18n="timeline.badge.planned">PLANNED</span></div>
           </div>
-          <p class="m-desc">Simulação de falhas reais — perda de GPS, reset, queda de LoRa e brownout de energia.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t19.desc">Simulação de falhas reais — perda de GPS, reset, queda de LoRa e brownout de energia.</p>
+          <ul class="m-obj" data-i18n-html="missions.t19.obj">
             <li>Perda de GPS e queda de LoRa</li>
             <li>Reset e brownout</li>
             <li>Comportamento de failsafe</li>
           </ul>
-          <p class="mc-crit">Comportamento previsível em falha</p>
-          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)">Planejada</span></div>
+          <p class="mc-crit" data-i18n="missions.t19.crit">Comportamento previsível em falha</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:rgba(150,185,255,.6)" data-i18n="missions.status.planned">Planejada</span></div>
         </div>
 
         <div class="m-card m-card-sm reveal rd2" style="border-color:rgba(0,212,255,.22)">
           <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.55"></div>
           <div class="m-header">
-            <div><div class="m-id">AR-T20</div><div class="m-name" style="color:var(--cyan)">Fase 0 Completion</div></div>
-            <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
+            <div><div class="m-id">AR-T20</div><div class="m-name" style="color:var(--cyan)" data-i18n="missions.t20.title">Fase 0 Completion</div></div>
+            <div class="badge b-milestone"><span class="badge-dot"></span><span data-i18n="timeline.badge.milestone">MILESTONE</span></div>
           </div>
-          <p class="m-desc">Missão final da Fase 0 — validação de maturidade da arquitetura, estabilidade geral e prontidão para voo.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.t20.desc">Missão final da Fase 0 — validação de maturidade da arquitetura, estabilidade geral e prontidão para voo.</p>
+          <ul class="m-obj" data-i18n-html="missions.t20.obj">
             <li>Maturidade da arquitetura</li>
             <li>Estabilidade geral do sistema</li>
             <li>Prontidão certificada para voo</li>
           </ul>
-          <p class="mc-crit" style="color:var(--cyan)">Sistema pronto para a Fase 1</p>
-          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)">Milestone</span></div>
+          <p class="mc-crit" style="color:var(--cyan)" data-i18n="missions.t20.crit">Sistema pronto para a Fase 1</p>
+          <div class="m-footer"><span class="m-date">Q4 2027</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)" data-i18n="missions.status.milestone">Milestone</span></div>
         </div>
 
       </div>
@@ -1021,40 +1035,40 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
     <!-- ── FLIGHT MISSIONS ── -->
     <div style="margin-top:2.8rem">
       <div class="m-section-hdr reveal" style="color:rgba(0,212,255,.65)">
-        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase">◇ Missões de Voo — Fases 1–3</span>
+        <span style="font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase" data-i18n="missions.sectionFlight">◇ Missões de Voo — Fases 1–3</span>
         <div style="flex:1;height:1px;background:rgba(0,212,255,.1)"></div>
       </div>
       <div class="m-grid">
 
         <div class="m-card reveal rd1">
           <div class="m-header">
-            <div><div class="m-id">ARACI / A-SERIES / 01</div><div class="m-name">Araci A-01</div></div>
-            <div class="badge b-future"><span class="badge-dot"></span>FUTURE</div>
+            <div><div class="m-id">ARACI / A-SERIES / 01</div><div class="m-name" data-i18n="missions.a01.title">Araci A-01</div></div>
+            <div class="badge b-future"><span class="badge-dot"></span><span data-i18n="timeline.badge.future">FUTURE</span></div>
           </div>
-          <p class="m-desc">Primeiro voo de altitude real. Validação de recuperação, tracking GPS e telemetria ao vivo em ambiente de voo.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n="missions.a01.desc">Primeiro voo de altitude real. Validação de recuperação, tracking GPS e telemetria ao vivo em ambiente de voo.</p>
+          <ul class="m-obj" data-i18n-html="missions.a01.obj">
             <li>Primeiro voo de altitude real</li>
             <li>Validação do sistema de recuperação</li>
             <li>Tracking GPS em voo</li>
             <li>Telemetria ao vivo em altitude</li>
           </ul>
-          <div class="m-footer"><span class="m-date">2028</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted)">Futura</span></div>
+          <div class="m-footer"><span class="m-date">2028</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted)" data-i18n="missions.status.future">Futura</span></div>
         </div>
 
         <div class="m-card reveal rd2" style="border-color:rgba(0,212,255,.22)">
           <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5"></div>
           <div class="m-header">
-            <div><div class="m-id">ARACI / S-SERIES / 01</div><div class="m-name" style="color:var(--cyan)">Araci S-01</div></div>
-            <div class="badge b-milestone"><span class="badge-dot"></span>MILESTONE</div>
+            <div><div class="m-id">ARACI / S-SERIES / 01</div><div class="m-name" style="color:var(--cyan)" data-i18n="missions.s01.title">Araci S-01</div></div>
+            <div class="badge b-milestone"><span class="badge-dot"></span><span data-i18n="timeline.badge.milestone">MILESTONE</span></div>
           </div>
-          <p class="m-desc"><strong style="color:#fff">A missão histórica.</strong> Primeira entrada da Dumont Space no regime estratosférico — cruzar a barreira dos 12 km.</p>
-          <ul class="m-obj">
+          <p class="m-desc" data-i18n-html="missions.s01.desc"><strong style="color:#fff">A missão histórica.</strong> Primeira entrada da Dumont Space no regime estratosférico — cruzar a barreira dos 12 km.</p>
+          <ul class="m-obj" data-i18n-html="missions.s01.obj">
             <li>Primeira entrada estratosférica</li>
             <li>Cruzar a barreira dos 12 km</li>
             <li>Milestone histórico do Programa Araci</li>
             <li>Validação de sistemas near-space</li>
           </ul>
-          <div class="m-footer"><span class="m-date">2028–2029</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)">Milestone</span></div>
+          <div class="m-footer"><span class="m-date">2028–2029</span><span style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan)" data-i18n="missions.status.milestone">Milestone</span></div>
         </div>
 
       </div>
@@ -1067,38 +1081,38 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 <!-- ═══════════════ ASPSAT ═══════════════ -->
 <section class="aspsat" id="aspsat">
   <div class="si">
-    <p class="s-label reveal">Plataforma Experimental</p>
-    <h2 class="s-title reveal rd1">Sonda <span>Araci-1</span></h2>
-    <p class="s-desc reveal rd2">Plataforma híbrida drone-balão composta por quatro subsistemas integrados: Harpia I, AspSat, Balão estratosférico e Paraquedas.</p>
+    <p class="s-label reveal" data-i18n="aspsat.label">Plataforma Experimental</p>
+    <h2 class="s-title reveal rd1" data-i18n-html="aspsat.title">Sonda <span>Araci-1</span></h2>
+    <p class="s-desc reveal rd2" data-i18n="aspsat.desc">Plataforma híbrida drone-balão composta por quatro subsistemas integrados: Harpia I, AspSat, Balão estratosférico e Paraquedas.</p>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem">
 
       <!-- LEFT: strategy -->
       <div class="reveal rd1">
-        <p style="font-size:.95rem;color:var(--text-secondary);line-height:1.88;margin-bottom:1.8rem">
+        <p style="font-size:.95rem;color:var(--text-secondary);line-height:1.88;margin-bottom:1.8rem" data-i18n="aspsat.intro">
           A Sonda Araci-1 é uma plataforma híbrida drone-balão projetada para exploração estratosférica. Quatro subsistemas trabalham em sequência para garantir lançamento, ascensão, descida e pouso seguros.
         </p>
-        <div style="font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;color:var(--cyan);margin-bottom:1.1rem;text-transform:uppercase">Perfil de Missão</div>
+        <div style="font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;color:var(--cyan);margin-bottom:1.1rem;text-transform:uppercase" data-i18n="aspsat.profile">Perfil de Missão</div>
         <div>
           <div class="phase-item">
             <div class="phase-alt">0 → 100 m</div>
-            <div><div class="phase-name">Lançamento</div><div class="phase-desc">Harpia I decola verticalmente carregando toda a sonda. A 100 m o balão é acionado e inflado.</div></div>
+            <div><div class="phase-name" data-i18n="aspsat.phase1.name">Lançamento</div><div class="phase-desc" data-i18n="aspsat.phase1.desc">Harpia I decola verticalmente carregando toda a sonda. A 100 m o balão é acionado e inflado.</div></div>
           </div>
           <div class="phase-item">
             <div class="phase-alt">100 m → 3 km</div>
-            <div><div class="phase-name">Ascensão Assistida</div><div class="phase-desc">Balão e drone operam em conjunto. Harpia I fornece estabilização ativa e controle de navegação durante a subida.</div></div>
+            <div><div class="phase-name" data-i18n="aspsat.phase2.name">Ascensão Assistida</div><div class="phase-desc" data-i18n="aspsat.phase2.desc">Balão e drone operam em conjunto. Harpia I fornece estabilização ativa e controle de navegação durante a subida.</div></div>
           </div>
           <div class="phase-item">
             <div class="phase-alt">3 km → MAX</div>
-            <div><div class="phase-name">Ascensão Estratosférica</div><div class="phase-desc">Operação exclusiva do balão. A sonda sobe livremente até a altitude máxima da missão.</div></div>
+            <div><div class="phase-name" data-i18n="aspsat.phase3.name">Ascensão Estratosférica</div><div class="phase-desc" data-i18n="aspsat.phase3.desc">Operação exclusiva do balão. A sonda sobe livremente até a altitude máxima da missão.</div></div>
           </div>
           <div class="phase-item">
             <div class="phase-alt">MAX → 3 km</div>
-            <div><div class="phase-name">Descida com PAE01</div><div class="phase-desc">O estouro do balão aciona automaticamente o paraquedas PAE01. Descida controlada até os 3 km.</div></div>
+            <div><div class="phase-name" data-i18n="aspsat.phase4.name">Descida com PAE01</div><div class="phase-desc" data-i18n="aspsat.phase4.desc">O estouro do balão aciona automaticamente o paraquedas PAE01. Descida controlada até os 3 km.</div></div>
           </div>
           <div class="phase-item">
             <div class="phase-alt" style="color:#00ff88">3 km → solo</div>
-            <div><div class="phase-name">Pouso Autônomo</div><div class="phase-desc">A 3 km na descida, Harpia I retoma o controle e executa o pouso preciso e seguro da sonda.</div></div>
+            <div><div class="phase-name" data-i18n="aspsat.phase5.name">Pouso Autônomo</div><div class="phase-desc" data-i18n="aspsat.phase5.desc">A 3 km na descida, Harpia I retoma o controle e executa o pouso preciso e seguro da sonda.</div></div>
           </div>
         </div>
       </div>
@@ -1106,7 +1120,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
       <!-- RIGHT: engineering diagram -->
       <div class="reveal rd3">
         <div class="plat-wrap">
-          <div class="plat-hint">Diagrama de Engenharia — passe o mouse nos componentes</div>
+          <div class="plat-hint" data-i18n="aspsat.diagramHint">Diagrama de Engenharia — passe o mouse nos componentes</div>
           <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" id="platform-svg" style="width:100%;display:block">
             <defs>
               <pattern id="eng-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0L0 0 0 20" fill="none" stroke="rgba(0,212,255,0.055)" stroke-width="0.5"/></pattern>
@@ -1132,7 +1146,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
               <!-- label -->
               <line x1="148" y1="74" x2="82" y2="74" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
               <circle cx="148" cy="74" r="1.8" fill="rgba(0,212,255,0.45)"/>
-              <text x="78" y="72" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">BALÃO</text>
+              <text x="78" y="72" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold" data-i18n="diagram.balloon">BALÃO</text>
               <text x="78" y="82" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">BATM-PAE01</text>
             </g>
 
@@ -1156,7 +1170,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
               <!-- label -->
               <line x1="171" y1="174" x2="82" y2="174" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
               <circle cx="171" cy="174" r="1.8" fill="rgba(0,212,255,0.45)"/>
-              <text x="78" y="172" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">PARAQUEDAS</text>
+              <text x="78" y="172" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold" data-i18n="diagram.parachute">PARAQUEDAS</text>
               <text x="78" y="182" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">PC-PAE01</text>
             </g>
 
@@ -1190,7 +1204,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
               <!-- label -->
               <line x1="160" y1="265" x2="82" y2="265" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
               <circle cx="160" cy="265" r="1.8" fill="rgba(0,212,255,0.45)"/>
-              <text x="78" y="263" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">CÁPSULA</text>
+              <text x="78" y="263" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold" data-i18n="diagram.capsule">CÁPSULA</text>
               <text x="78" y="273" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">AspSat</text>
             </g>
 
@@ -1241,7 +1255,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
               <!-- label -->
               <line x1="114" y1="367" x2="82" y2="367" stroke="rgba(0,212,255,0.2)" stroke-width="0.7" stroke-dasharray="3,3"/>
               <circle cx="114" cy="367" r="1.8" fill="rgba(0,212,255,0.45)"/>
-              <text x="78" y="365" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold">DRONE</text>
+              <text x="78" y="365" text-anchor="end" font-family="monospace" font-size="8" fill="rgba(0,212,255,0.6)" font-weight="bold" data-i18n="diagram.drone">DRONE</text>
               <text x="78" y="375" text-anchor="end" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.32)">HARPIA I</text>
             </g>
 
@@ -1279,36 +1293,36 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
         <a href="#">
           <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="footer-logo-img">
         </a>
-        <p class="footer-desc">Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.</p>
-        <p class="footer-phrase">"O céu é apenas o começo."</p>
+        <p class="footer-desc" data-i18n="footer.desc">Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.</p>
+        <p class="footer-phrase" data-i18n="footer.phrase">"O céu é apenas o começo."</p>
       </div>
       <div>
-        <div class="footer-col-title">Navegação</div>
+        <div class="footer-col-title" data-i18n="footer.navTitle">Navegação</div>
         <ul class="footer-links">
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#tecnologia">Tecnologia</a></li>
-          <li><a href="#programas">Programas</a></li>
-          <li><a href="#araci">Programa Araci</a></li>
+          <li><a href="#sobre" data-i18n="nav.about">Sobre</a></li>
+          <li><a href="#tecnologia" data-i18n="nav.tech">Tecnologia</a></li>
+          <li><a href="#programas" data-i18n="nav.programs">Programas</a></li>
+          <li><a href="#araci" data-i18n="nav.araciProgram">Programa Araci</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Operações</div>
+        <div class="footer-col-title" data-i18n="footer.opsTitle">Operações</div>
         <ul class="footer-links">
-          <li><a href="#missoes">Missões</a></li>
-          <li><a href="#aspsat">Sonda Araci-1</a></li>
+          <li><a href="#missoes" data-i18n="nav.missions">Missões</a></li>
+          <li><a href="#aspsat" data-i18n="footer.probeLink">Sonda Araci-1</a></li>
           <li><a href="#araci">Timeline</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Contato</div>
+        <div class="footer-col-title" data-i18n="footer.contactTitle">Contato</div>
         <ul class="footer-links">
-          <li><a href="#">Fale Conosco</a></li>
+          <li><a href="#" data-i18n="footer.contactLink">Fale Conosco</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Dumont Space — Todos os direitos reservados</span>
-      <span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted);letter-spacing:.1em">BRASIL · EXPLORAÇÃO AEROESPACIAL EXPERIMENTAL</span>
+      <span class="footer-copy" data-i18n="footer.copy">© 2026 Dumont Space — Todos os direitos reservados</span>
+      <span style="font-family:var(--font-m);font-size:.68rem;color:var(--text-muted);letter-spacing:.1em" data-i18n="footer.region">BRASIL · EXPLORAÇÃO AEROESPACIAL EXPERIMENTAL</span>
       <div class="footer-social">
         <a href="#" class="footer-soc-a" title="Instagram">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
@@ -1318,6 +1332,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
   </div>
 </footer>
 
+<script src="translations.js"></script>
 <script>
 // ── STARS CANVAS ──
 const canvas = document.getElementById('stars-canvas');
@@ -1428,33 +1443,86 @@ function scrollTo(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 
-// ── PLATFORM DIAGRAM TOOLTIPS ──
-const compInfo = {
-  balao: {
-    name: 'Balão de Alta Altitude',
-    role: 'Propulsão Ascendente',
-    desc: 'Acionado a 100 m após o lançamento inicial pelo Harpia I. Responsável pela ascensão do sistema de 100 m até a altitude máxima da missão. O estouro do balão dispara automaticamente o paraquedas PAE01.',
-    specs: ['Gás: Hélio', 'Envelope expansível', 'Aciona PAE01 no estouro', 'Opera acima de 3 km']
-  },
-  pae01: {
-    name: 'PAE01 — Paraquedas',
-    role: 'Sistema de Recuperação',
-    desc: 'Acionado automaticamente após o estouro do balão na altitude máxima. Controla a descida da sonda até os 3 km, onde o Harpia I assume o controle para o pouso final.',
-    specs: ['Acionamento automático', 'Descida controlada', 'Opera MAX → 3 km', 'Redundância de ativação']
-  },
-  aspsat: {
-    name: 'AspSat — Cápsula Aspirante a Satélite',
-    role: 'Núcleo Instrumental',
-    desc: 'Núcleo científico e instrumental da sonda. Contém todo o hardware de telemetria, sensores ambientais, câmera, GPS redundante, LoRa e sistemas de energia. Projetada para operar no ambiente estratosférico extremo.',
-    specs: ['ESP32 + LoRa + GPS dual', 'Sensores BME280 + IMU', 'Câmera FPV + gravação', 'Bateria LiPo + BMS']
-  },
-  harpia: {
-    name: 'Harpia I — Drone',
-    role: 'Lançamento & Pouso Autônomo',
-    desc: 'Responsável pelo lançamento inicial (0–100 m) e estabilização ativa durante a ascensão assistida (100 m–3 km). Na descida, quando a sonda atinge 3 km com paraquedas, Harpia I retoma o controle para o pouso preciso.',
-    specs: ['Lançamento: 0 → 100 m', 'Estabilização: 100 m → 3 km', 'Pouso autônomo: 3 km → solo', 'Configuração X quad']
+const i18nConfig = window.DUMONT_I18N || { supportedLanguages: ['pt-BR', 'en', 'es'], translations: {}, componentInfoTranslations: {} };
+const supportedLanguages = i18nConfig.supportedLanguages || ['pt-BR', 'en', 'es'];
+const translations = i18nConfig.translations || {};
+const componentInfoTranslations = i18nConfig.componentInfoTranslations || {};
+const langSelect = document.getElementById('lang-select');
+const metaDescription = document.querySelector('meta[name="description"]');
+const defaultTranslations = {};
+document.querySelectorAll('[data-i18n]').forEach(el => {
+  defaultTranslations[el.dataset.i18n] = el.textContent.trim();
+});
+document.querySelectorAll('[data-i18n-html]').forEach(el => {
+  defaultTranslations[el.dataset.i18nHtml] = el.innerHTML.trim();
+});
+defaultTranslations['meta.title'] = document.title;
+defaultTranslations['meta.description'] = metaDescription ? metaDescription.getAttribute('content') : '';
+
+function normalizeLanguage(locale) {
+  if (!locale) return null;
+  const normalized = locale.toLowerCase();
+  if (normalized.startsWith('pt')) return 'pt-BR';
+  if (normalized.startsWith('en')) return 'en';
+  if (normalized.startsWith('es')) return 'es';
+  if (normalized.startsWith('fr')) return 'fr';
+  if (normalized.startsWith('ru')) return 'ru';
+  if (normalized.startsWith('ja')) return 'ja';
+  return null;
+}
+
+function detectInitialLanguage() {
+  const saved = localStorage.getItem('dumont-language');
+  if (saved && supportedLanguages.includes(saved)) return saved;
+  const locales = [...new Set([...(navigator.languages || []), navigator.language].filter(Boolean))];
+  if (!locales.length) return 'pt-BR';
+  for (const locale of locales) {
+    const language = normalizeLanguage(locale);
+    if (language) return language;
   }
-};
+  return 'en';
+}
+
+let currentLanguage = detectInitialLanguage();
+let activeComponentKey = null;
+
+function getBundle(lang) {
+  const fallback = translations.en || {};
+  const target = translations[lang] || fallback;
+  return { ...defaultTranslations, ...fallback, ...target };
+}
+
+function applyLanguage(lang) {
+  currentLanguage = supportedLanguages.includes(lang) ? lang : 'pt-BR';
+  const bundle = getBundle(currentLanguage);
+  document.documentElement.lang = currentLanguage;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (bundle[key] !== undefined) el.textContent = bundle[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (bundle[key] !== undefined) el.innerHTML = bundle[key];
+  });
+  document.title = bundle['meta.title'];
+  if (metaDescription) metaDescription.setAttribute('content', bundle['meta.description']);
+  if (langSelect) {
+    langSelect.value = currentLanguage;
+  }
+  localStorage.setItem('dumont-language', currentLanguage);
+  if (activeComponentKey) updatePlatformTooltip(activeComponentKey);
+}
+
+if (langSelect) {
+  langSelect.addEventListener('change', e => {
+    applyLanguage(e.target.value);
+  });
+}
+
+// ── PLATFORM DIAGRAM TOOLTIPS ──
+function getComponentBundle(lang) {
+  return componentInfoTranslations[lang] || componentInfoTranslations.en || {};
+}
 
 const platTooltip = document.getElementById('plat-tooltip');
 const ptName = document.getElementById('pt-name');
@@ -1462,15 +1530,20 @@ const ptRole = document.getElementById('pt-role');
 const ptDesc = document.getElementById('pt-desc');
 const ptSpecs = document.getElementById('pt-specs');
 
+function updatePlatformTooltip(componentKey) {
+  const info = getComponentBundle(currentLanguage)[componentKey];
+  if (!info) return;
+  ptName.textContent = info.name;
+  ptRole.textContent = info.role;
+  ptDesc.textContent = info.desc;
+  ptSpecs.innerHTML = info.specs.map(spec => `<span class="pt-spec">${spec}</span>`).join('');
+}
+
 document.querySelectorAll('.pc-hover').forEach(el => {
   el.addEventListener('mouseenter', function() {
     const c = this.dataset.c;
-    const info = compInfo[c];
-    if (!info) return;
-    ptName.textContent = info.name;
-    ptRole.textContent = info.role;
-    ptDesc.textContent = info.desc;
-    ptSpecs.innerHTML = info.specs.map(s => `<span class="pt-spec">${s}</span>`).join('');
+    activeComponentKey = c;
+    updatePlatformTooltip(c);
     platTooltip.classList.add('active');
     document.querySelectorAll('.pc-group').forEach(g => g.classList.remove('pc-lit'));
     const grp = document.getElementById('g-' + c);
@@ -1481,10 +1554,13 @@ document.querySelectorAll('.pc-hover').forEach(el => {
 const pSvg = document.getElementById('platform-svg');
 if (pSvg) {
   pSvg.addEventListener('mouseleave', () => {
+    activeComponentKey = null;
     platTooltip.classList.remove('active');
     document.querySelectorAll('.pc-group').forEach(g => g.classList.remove('pc-lit'));
   });
 }
+
+applyLanguage(currentLanguage);
 </script>
 </body>
 </html>
