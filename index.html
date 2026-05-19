@@ -3,11 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dumont Space — Exploração Aeroespacial Experimental Brasileira. Plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.">
-<title>Dumont Space — Exploração Aeroespacial Experimental Brasileira</title>
+<title>Dumont Space | Exploração Aeroespacial Experimental Brasileira</title>
+<meta name="description" content="Dumont Space é uma iniciativa aeroespacial experimental brasileira focada em exploração estratosférica, sistemas embarcados, telemetria e tecnologias atmosféricas avançadas.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Dumont Space">
+<meta name="keywords" content="Dumont Space, exploração aeroespacial, estratosfera, near-space, sistemas embarcados, telemetria, plataforma estratosférica, tecnologia aeroespacial brasileira">
+<meta name="theme-color" content="#020510">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dumont Space">
+<meta property="og:title" content="Dumont Space | Exploração Aeroespacial Experimental Brasileira">
+<meta property="og:description" content="Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.">
+<meta property="og:url" content="https://dumontspace.com/">
+<meta property="og:image" content="https://dumontspace.com/images/dumont_logo_with_text.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Logotipo da Dumont Space">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dumont Space | Exploração Aeroespacial Experimental Brasileira">
+<meta name="twitter:description" content="Exploração estratosférica experimental, telemetria, sistemas embarcados e tecnologias atmosféricas avançadas.">
+<meta name="twitter:image" content="https://dumontspace.com/images/dumont_logo_with_text.png">
+<link rel="canonical" href="https://dumontspace.com/">
+<link rel="icon" type="image/png" href="images/dumont_simbol_only.png">
+<link rel="apple-touch-icon" href="images/dumont_simbol_only.png">
+<link rel="preload" as="image" href="images/dumont_logo_with_text_transparent.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://dumontspace.com/#organization",
+      "name": "Dumont Space",
+      "url": "https://dumontspace.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dumontspace.com/images/dumont_logo_with_text.png"
+      },
+      "description": "Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.",
+      "areaServed": "BR",
+      "foundingLocation": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
+      "knowsAbout": [
+        "Exploração estratosférica",
+        "Near-space",
+        "Telemetria",
+        "Sistemas embarcados",
+        "Plataformas atmosféricas",
+        "Tecnologia aeroespacial brasileira"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dumontspace.com/#website",
+      "url": "https://dumontspace.com/",
+      "name": "Dumont Space",
+      "description": "Site institucional da Dumont Space com programas, missões, plataformas e tecnologias aeroespaciais experimentais.",
+      "publisher": {
+        "@id": "https://dumontspace.com/#organization"
+      },
+      "inLanguage": ["pt-BR", "en", "es", "fr", "ru", "ja"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dumontspace.com/#webpage",
+      "url": "https://dumontspace.com/",
+      "name": "Dumont Space | Exploração Aeroespacial Experimental Brasileira",
+      "description": "Conheça a Dumont Space, seus programas estratosféricos, missões experimentais e tecnologias embarcadas aeroespaciais.",
+      "isPartOf": {
+        "@id": "https://dumontspace.com/#website"
+      },
+      "about": {
+        "@id": "https://dumontspace.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://dumontspace.com/images/dumont_logo_with_text.png"
+      },
+      "inLanguage": "pt-BR"
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --bg-deep:#020510;
@@ -33,6 +119,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);line-height:1.6;overflow-x:hidden}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg-deep)}
 ::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
@@ -327,8 +414,8 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 
 <!-- ═══════════════ NAV ═══════════════ -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo">
-    <img src="images/dumont_symbol_only_transparent.png" alt="Dumont Space" class="nav-logo-img">
+  <a href="/" class="nav-logo" aria-label="Dumont Space - página inicial">
+    <img src="images/dumont_symbol_only_transparent.png" alt="Logotipo Dumont Space" class="nav-logo-img" decoding="async">
   </a>
   <ul class="nav-links">
     <li><a href="#sobre" data-i18n="nav.about">Sobre</a></li>
@@ -362,17 +449,20 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
   <a href="#aspsat" onclick="toggleNav()" data-i18n="nav.aspsat">AspSat</a>
 </div>
 
+<main id="main-content">
+
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <canvas id="stars-canvas"></canvas>
   <div class="hero-atmo"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
+    <h1 class="sr-only" id="page-title">Dumont Space | Exploração Aeroespacial Experimental Brasileira</h1>
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
       <span data-i18n="hero.badge">Iniciativa Aeroespacial Experimental Brasileira</span>
     </div>
-    <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="hero-logo-img">
+    <img src="images/dumont_logo_with_text_transparent.png" alt="Logotipo Dumont Space" class="hero-logo-img" fetchpriority="high" decoding="async">
     <p class="hero-desc" data-i18n="hero.desc">
       Iniciativa aeroespacial experimental voltada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.
     </p>
@@ -498,7 +588,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
     <div class="prog-card reveal rd2" onclick="scrollTo('araci')">
       <div class="prog-card-bg"></div>
       <div class="prog-card-vis">
-        <img style="margin-top: -50px;width: 250px;height: 250px;" src="images/Araci_Logo.png" alt="Programa Araci" class="prog-araci-logo-img">
+        <img style="margin-top: -50px;width: 250px;height: 250px;" src="images/Araci_Logo.png" alt="Logotipo do Programa Araci" class="prog-araci-logo-img" loading="lazy" decoding="async">
       </div>
       <div class="prog-card-in">
         <div class="prog-badge">
@@ -556,7 +646,7 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
 
       <div class="hud-panel reveal rd3">
         <div style="text-align:center;padding-bottom:1.2rem;margin-bottom:1.2rem;border-bottom:1px solid var(--border)">
-          <img src="images/Araci_Logo.png" alt="Programa Araci" class="araci-prog-logo" style="width:275px;height:275px">
+          <img src="images/Araci_Logo.png" alt="Logotipo do Programa Araci" class="araci-prog-logo" style="width:275px;height:275px" loading="lazy" decoding="async">
         </div>
         <div class="hud-row">
           <span class="hud-lbl" data-i18n="araci.hud.phaseLabel">Fase Atual</span>
@@ -1285,13 +1375,15 @@ footer{background:#01040a;border-top:1px solid var(--border);padding:4rem 2rem 2
   </div>
 </section>
 
+</main>
+
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
   <div class="footer-in">
     <div class="footer-top">
       <div>
-        <a href="#">
-          <img src="images/dumont_logo_with_text_transparent.png" alt="Dumont Space" class="footer-logo-img">
+        <a href="/" aria-label="Dumont Space - página inicial">
+          <img src="images/dumont_logo_with_text_transparent.png" alt="Logotipo Dumont Space" class="footer-logo-img" loading="lazy" decoding="async">
         </a>
         <p class="footer-desc" data-i18n="footer.desc">Iniciativa aeroespacial experimental brasileira dedicada ao desenvolvimento de plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.</p>
         <p class="footer-phrase" data-i18n="footer.phrase">"O céu é apenas o começo."</p>
@@ -1449,6 +1541,11 @@ const translations = i18nConfig.translations || {};
 const componentInfoTranslations = i18nConfig.componentInfoTranslations || {};
 const langSelect = document.getElementById('lang-select');
 const metaDescription = document.querySelector('meta[name="description"]');
+const ogTitle = document.querySelector('meta[property="og:title"]');
+const ogDescription = document.querySelector('meta[property="og:description"]');
+const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+const seoHeading = document.getElementById('page-title');
 const defaultTranslations = {};
 document.querySelectorAll('[data-i18n]').forEach(el => {
   defaultTranslations[el.dataset.i18n] = el.textContent.trim();
@@ -1505,7 +1602,12 @@ function applyLanguage(lang) {
     if (bundle[key] !== undefined) el.innerHTML = bundle[key];
   });
   document.title = bundle['meta.title'];
+  if (seoHeading) seoHeading.textContent = bundle['meta.title'];
   if (metaDescription) metaDescription.setAttribute('content', bundle['meta.description']);
+  if (ogTitle) ogTitle.setAttribute('content', bundle['meta.title']);
+  if (ogDescription) ogDescription.setAttribute('content', bundle['meta.description']);
+  if (twitterTitle) twitterTitle.setAttribute('content', bundle['meta.title']);
+  if (twitterDescription) twitterDescription.setAttribute('content', bundle['meta.description']);
   if (langSelect) {
     langSelect.value = currentLanguage;
   }

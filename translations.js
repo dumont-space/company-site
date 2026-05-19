@@ -2,8 +2,8 @@ window.DUMONT_I18N = {
   supportedLanguages: ['pt-BR', 'en', 'es', 'fr', 'ru', 'ja'],
   translations: {
     'pt-BR': {
-      'meta.title': 'Dumont Space — Exploração Aeroespacial Experimental Brasileira',
-      'meta.description': 'Dumont Space — Exploração Aeroespacial Experimental Brasileira. Plataformas estratosféricas, sistemas embarcados e tecnologias atmosféricas avançadas.',
+      'meta.title': 'Dumont Space | Exploração Aeroespacial Experimental Brasileira',
+      'meta.description': 'Dumont Space: exploração aeroespacial experimental brasileira com plataformas estratosféricas, telemetria, sistemas embarcados e tecnologias atmosféricas avançadas.',
       'nav.about': 'Sobre',
       'nav.tech': 'Tecnologia',
       'nav.programs': 'Programas',
@@ -224,8 +224,8 @@ window.DUMONT_I18N = {
       'footer.region': 'BRASIL · EXPLORAÇÃO AEROESPACIAL EXPERIMENTAL'
     },
     en: {
-      'meta.title': 'Dumont Space — Brazilian Experimental Aerospace Exploration',
-      'meta.description': 'Dumont Space — Brazilian experimental aerospace exploration. Stratospheric platforms, embedded systems, and advanced atmospheric technologies.',
+      'meta.title': 'Dumont Space | Brazilian Experimental Aerospace Exploration',
+      'meta.description': 'Dumont Space: Brazilian experimental aerospace exploration focused on stratospheric platforms, telemetry, embedded systems, and advanced atmospheric technologies.',
       'nav.about': 'About',
       'nav.tech': 'Technology',
       'nav.programs': 'Programs',
@@ -446,8 +446,8 @@ window.DUMONT_I18N = {
       'footer.region': 'BRAZIL · EXPERIMENTAL AEROSPACE EXPLORATION'
     },
     es: {
-      'meta.title': 'Dumont Space — Exploración Aeroespacial Experimental Brasileña',
-      'meta.description': 'Dumont Space — exploración aeroespacial experimental brasileña. Plataformas estratosféricas, sistemas embebidos y tecnologías atmosféricas avanzadas.',
+      'meta.title': 'Dumont Space | Exploración Aeroespacial Experimental Brasileña',
+      'meta.description': 'Dumont Space: exploración aeroespacial experimental brasileña centrada en plataformas estratosféricas, telemetría, sistemas embebidos y tecnologías atmosféricas avanzadas.',
       'nav.about': 'Sobre',
       'nav.tech': 'Tecnología',
       'nav.programs': 'Programas',
@@ -668,8 +668,8 @@ window.DUMONT_I18N = {
       'footer.region': 'BRASIL · EXPLORACIÓN AEROESPACIAL EXPERIMENTAL'
     },
     fr: {
-      'meta.title': 'Dumont Space — Exploration Aérospatiale Expérimentale Brésilienne',
-      'meta.description': 'Dumont Space — exploration aérospatiale expérimentale brésilienne. Plateformes stratosphériques, systèmes embarqués et technologies atmosphériques avancées.',
+      'meta.title': 'Dumont Space | Exploration Aérospatiale Expérimentale Brésilienne',
+      'meta.description': 'Dumont Space : exploration aérospatiale expérimentale brésilienne axée sur les plateformes stratosphériques, la télémétrie, les systèmes embarqués et les technologies atmosphériques avancées.',
       'nav.about': 'À propos',
       'nav.tech': 'Technologie',
       'nav.programs': 'Programmes',
@@ -890,8 +890,8 @@ window.DUMONT_I18N = {
       'footer.region': 'BRÉSIL · EXPLORATION AÉROSPATIALE EXPÉRIMENTALE'
     },
     ru: {
-      'meta.title': 'Dumont Space — Бразильские Экспериментальные Аэрокосмические Исследования',
-      'meta.description': 'Dumont Space — бразильские экспериментальные аэрокосмические исследования. Стратосферные платформы, бортовые системы и передовые атмосферные технологии.',
+      'meta.title': 'Dumont Space | Бразильские Экспериментальные Аэрокосмические Исследования',
+      'meta.description': 'Dumont Space: бразильские экспериментальные аэрокосмические исследования с акцентом на стратосферные платформы, телеметрию, бортовые системы и передовые атмосферные технологии.',
       'nav.about': 'О проекте',
       'nav.tech': 'Технологии',
       'nav.programs': 'Программы',
@@ -1112,8 +1112,8 @@ window.DUMONT_I18N = {
       'footer.region': 'БРАЗИЛИЯ · ЭКСПЕРИМЕНТАЛЬНЫЕ АЭРОКОСМИЧЕСКИЕ ИССЛЕДОВАНИЯ'
     },
     ja: {
-      'meta.title': 'Dumont Space — ブラジル実験航空宇宙探査',
-      'meta.description': 'Dumont Space — ブラジルの実験航空宇宙探査。成層圏プラットフォーム、組み込みシステム、高度な大気技術。',
+      'meta.title': 'Dumont Space | ブラジル実験航空宇宙探査',
+      'meta.description': 'Dumont Space: 成層圏プラットフォーム、テレメトリ、組み込みシステム、高度な大気技術に取り組むブラジルの実験的航空宇宙プロジェクト。',
       'nav.about': '概要',
       'nav.tech': '技術',
       'nav.programs': 'プログラム',
