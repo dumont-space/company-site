@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://dumontspace.com/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://dumontspace.com/images/dumont_logo_with_text.png</image:loc>
+      <image:title>Dumont Space</image:title>
+      <image:caption>Logotipo da Dumont Space</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://dumontspace.com/images/Araci_Logo.png</image:loc>
+      <image:title>Programa Araci</image:title>
+      <image:caption>Logotipo do Programa Araci</image:caption>
+    </image:image>
+  </url>
+</urlset>
